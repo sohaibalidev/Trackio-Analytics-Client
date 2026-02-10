@@ -15,7 +15,9 @@ const AnalyticsBrowserOS = ({ getBrowserData, getDeviceData }) => {
                 <div className={styles.itemInfo}>
                   <span className={styles.itemName}>{browser.name}</span>
                 </div>
-                <div className={styles.itemCount}>{browser.value} sessions</div>
+                <div className={styles.itemCount}>
+                  {browser.value} {browser.value === 1 ? "session" : "sessions"}
+                </div>
               </div>
             ))}
           </div>
@@ -29,7 +31,9 @@ const AnalyticsBrowserOS = ({ getBrowserData, getDeviceData }) => {
                 <div className={styles.itemInfo}>
                   <span className={styles.itemName}>{device.name}</span>
                 </div>
-                <div className={styles.itemCount}>{device.value} sessions</div>
+                <div className={styles.itemCount}>
+                  {device.value} {device.value === 1 ? "session" : "sessions"}
+                </div>
               </div>
             ))}
           </div>

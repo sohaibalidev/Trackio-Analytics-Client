@@ -1,5 +1,5 @@
 {
-  "name": "trackio-frontend",
+  "name": "trackio-analytics-frontend",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -7,7 +7,9 @@
     "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "upload": "git diff --quiet && git diff --cached --quiet && echo 'No changes to commit' || (git add . && git commit -m \"auto-update\" && git push origin main)",
+    "download": "git fetch origin && git reset --hard origin/main && git clean -fd && echo 'Project updated from GitHub'"
   },
   "dependencies": {
     "axios": "^1.5.0",
@@ -36,6 +38,6 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sohaibalidev/trackio-client.git"
+    "url": "git+https://github.com/sohaibalidev/trackio-analytics-client.git"
   }
 }

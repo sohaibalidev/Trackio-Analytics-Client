@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
-import styles from "./layout.module.css";
+import styles from "./Layout.module.css";
 
 const Layout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

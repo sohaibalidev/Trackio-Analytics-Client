@@ -1,10 +1,10 @@
-# Trackio Frontend
+# Trackio Analytics Frontend
 
 React dashboard for viewing Trackio analytics data. Provides interface for website analytics monitoring.
 
 ## Overview
 
-Single-page React application that connects to the Trackio backend API. Displays analytics data in a clean dashboard.
+Single-page React application that connects to the Trackio analytics backend API. Displays analytics data in a clean dashboard.
 
 ## Features
 

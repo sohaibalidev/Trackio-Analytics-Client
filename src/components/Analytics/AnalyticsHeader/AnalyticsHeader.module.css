@@ -40,7 +40,7 @@
 .select {
   padding: 10px 14px;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0;
   background: var(--dark-card);
   color: var(--text);
   font-size: 14px;
@@ -63,13 +63,11 @@
   color: var(--primary-accent);
   border: 1px solid var(--primary-accent);
   padding: 10px 16px;
-  border-radius: 6px;
+  border-radius: 0;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  height: 42px;
-  margin-top: 18px;
 }
 
 .refreshButton:hover:not(:disabled) {

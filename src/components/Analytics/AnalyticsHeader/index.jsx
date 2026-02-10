@@ -42,14 +42,19 @@ const AnalyticsHeader = ({
           </select>
         </div>
 
-        <button
-          className={`${styles.refreshButton} ${loading ? styles.loading : ""}`}
-          onClick={fetchAnalyticsData}
-          disabled={loading}
-        >
-          <RefreshCw size={16} className={styles.refreshIcon} />
-          Refresh
-        </button>
+        <div className={styles.selectGroup}>
+          <label className={styles.label} style={{ visibility: "hidden" }}>
+            refresh
+          </label>
+          <button
+            className={`${styles.refreshButton} ${loading ? styles.loading : ""}`}
+            onClick={fetchAnalyticsData}
+            disabled={loading}
+          >
+            <RefreshCw size={14} className={styles.refreshIcon} />
+            Refresh
+          </button>
+        </div>
       </div>
     </div>
   );

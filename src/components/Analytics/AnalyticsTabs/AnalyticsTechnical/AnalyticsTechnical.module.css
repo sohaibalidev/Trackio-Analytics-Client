@@ -10,7 +10,7 @@
 
 .card {
   background: rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 20px;
   border: 1px solid var(--border-color);
 }
@@ -36,7 +36,7 @@
   align-items: center;
   padding: 12px;
   background: var(--dark-card);
-  border-radius: 2px;
+  border-radius: 0px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
 }
@@ -63,7 +63,7 @@
   color: var(--primary-accent);
   background: rgba(212, 175, 55, 0.1);
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 .networkGrid {
@@ -75,7 +75,7 @@
 .networkCard {
   background: var(--dark-card);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 16px;
   transition: var(--transition);
 }
@@ -96,7 +96,7 @@
   width: 36px;
   height: 36px;
   background: rgba(212, 175, 55, 0.1);
-  border-radius: 6px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;

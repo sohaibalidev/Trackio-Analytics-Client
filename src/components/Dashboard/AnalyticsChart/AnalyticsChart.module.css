@@ -22,7 +22,7 @@
   color: var(--text-light);
   font-size: 14px;
   background: var(--dark-card);
-  border-radius: 6px;
+  border-radius: 0;
   border: 1px solid var(--border-color);
   padding: 40px;
   text-align: center;
@@ -32,7 +32,7 @@
   flex: 1;
   min-height: 0;
   background: var(--dark-card);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 20px;
   border: 1px solid var(--border-color);
   position: relative;
@@ -57,7 +57,7 @@
 :global(.recharts-tooltip-wrapper) {
   background: var(--dark-card) !important;
   border: 1px solid var(--border-color) !important;
-  border-radius: 6px !important;
+  border-radius: 0 !important;
   box-shadow: var(--shadow) !important;
   color: var(--text) !important;
 }
@@ -82,7 +82,7 @@
 .tooltip {
   background: var(--dark-card);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 12px;
   box-shadow: var(--shadow);
 }

@@ -1,6 +1,6 @@
 .tabsContainer {
   background: var(--dark-card);
-  border-radius: 6px;
+  border-radius: 0;
   border: 1px solid var(--border-color);
   overflow: hidden;
 }

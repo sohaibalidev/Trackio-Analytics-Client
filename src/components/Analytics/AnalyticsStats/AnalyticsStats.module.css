@@ -7,7 +7,7 @@
 
 .statCard {
   background: var(--dark-card);
-  border-radius: 6px;
+  border-radius: 0;
   padding: 20px;
   border: 1px solid var(--border-color);
   transition: var(--transition);
@@ -32,7 +32,7 @@
   width: 40px;
   height: 40px;
   background: rgba(212, 175, 55, 0.1);
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 .statTitle {

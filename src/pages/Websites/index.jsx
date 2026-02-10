@@ -196,7 +196,7 @@ const Websites = () => {
         onConfirm={handleConfirm}
         title={confirmState.title}
         message={confirmState.message}
-        confirmText={confirmState.confText}
+        confirmText={confirmState.confirmText}
         cancelText="Cancel"
       />
     </div>

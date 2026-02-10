@@ -51,7 +51,7 @@
   box-shadow: var(--shadow);
   padding: 24px;
   margin-bottom: 30px;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 .formHeader {
@@ -72,7 +72,7 @@
 .cancelButton {
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
+  border: 0px solid var(--primary-accent);
   padding: 8px 16px;
   border-radius: 0px;
   font-size: 14px;
@@ -109,7 +109,7 @@
   border-radius: 0;
   box-shadow: var(--shadow);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 .errorText {
@@ -222,5 +222,115 @@
 
   .title {
     font-size: 2.25rem;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modalContent {
+  background: var(--primary-color);
+  border-radius: 0;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid var(--border-color);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--card-header-bg, rgba(0, 0, 0, 0.1));
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modalCloseButton {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-lighter);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  transition: var(--transition);
+}
+
+.modalCloseButton:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text);
+}
+
+.modalBody {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95%;
+    max-width: 95%;
+    margin: 10px;
+  }
+
+  .modalHeader {
+    padding: 20px 20px 14px;
+  }
+
+  .modalBody {
+    padding: 20px;
+  }
+
+  .modalTitle {
+    font-size: 18px;
   }
 }

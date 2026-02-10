@@ -21,7 +21,7 @@
 
 .menuButton {
   background: rgba(212, 175, 55, 0.1);
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   color: var(--primary-accent);
   font-size: 20px;
   cursor: pointer;
@@ -102,7 +102,7 @@
 .logoutButton {
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
+  border: 0px solid var(--primary-accent);
   padding: 8px 16px;
   border-radius: 0px;
   font-size: 14px;

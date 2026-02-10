@@ -46,6 +46,7 @@ const WebsiteList = ({
                 <td>
                   <a
                     href={website.url}
+                    title={website.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.urlLink}

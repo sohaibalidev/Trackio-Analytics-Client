@@ -1,70 +1,177 @@
 .form {
-  max-width: 500px;
+  max-width: 100%;
+  padding: 0;
 }
 
 .formGroup {
   margin-bottom: 24px;
+  position: relative;
 }
 
 .label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 500;
   color: var(--text);
   font-size: 14px;
+  font-family: inherit;
+}
+
+.inputContainer {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  transition: var(--transition);
+}
+
+.inputContainer:focus-within {
+  background: rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(var(--primary-accent-rgb, 255, 215, 0), 0.1);
 }
 
 .input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 0;
-  font-size: 14px;
-  transition: var(--transition);
-  background: rgba(0, 0, 0, 0.2);
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
   color: var(--text);
-}
-
-.input:focus {
+  font-family: inherit;
   outline: none;
-  border-color: var(--primary-accent);
-  box-shadow: var(--gold-glow);
+  transition: var(--transition);
+  border-radius: 0;
 }
 
 .input::placeholder {
   color: var(--text-lighter);
+  opacity: 0.7;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputError {
+  color: var(--error);
+}
+
+.inputContainer.inputError {
+  border-color: var(--error);
+}
+
+.inputContainer.inputError:focus-within {
+  box-shadow: 0 0 0 3px rgba(var(--error-rgb, 255, 0, 0), 0.1);
 }
 
 .error {
   color: var(--error);
-  font-size: 12px;
-  margin-top: 4px;
-  display: block;
+  font-size: 13px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.checkboxGroup {
+.error::before {
+  content: "⚠";
+  font-size: 12px;
+}
+
+.toggleGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 0;
+  border: 1px solid var(--border-color);
+}
+
+.toggleLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.toggleText {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.toggleDescription {
+  font-size: 13px;
+  color: var(--text-lighter);
+  opacity: 0.9;
+}
+
+.toggleContainer {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
 }
 
-.checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--primary-accent);
+.toggleSlider {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--border-color);
+  border: none;
   cursor: pointer;
+  padding: 2px;
+  transition: all 0.3s ease;
 }
 
-.checkboxLabel {
+.toggleSlider:hover {
+  background: var(--text-lighter);
+}
+
+.toggleActive {
+  background: var(--primary-accent);
+}
+
+.toggleActive:hover {
+  background: var(--primary-accent-hover);
+}
+
+.toggleHandle {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggleActive .toggleHandle {
+  transform: translateX(24px);
+}
+
+.toggleStatus {
   font-size: 14px;
+  font-weight: 500;
   color: var(--text);
-  cursor: pointer;
+  min-width: 50px;
+}
+
+.hiddenCheckbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .submitButton {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border: none;
   border-radius: 0;
   font-size: 16px;
@@ -73,16 +180,44 @@
   transition: var(--transition);
   background: var(--primary-accent);
   color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
 }
 
 .submitButton:hover:not(:disabled) {
   background: var(--primary-accent-hover);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-hover);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submitButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none !important;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 480px) {
@@ -91,21 +226,27 @@
   }
 
   .input {
-    padding: 10px;
-    font-size: 13px;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .toggleGroup {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .toggleContainer {
+    justify-content: space-between;
   }
 
   .submitButton {
-    padding: 12px;
+    padding: 14px;
     font-size: 15px;
   }
 
-  .checkbox {
-    width: 16px;
-    height: 16px;
-  }
-
-  .checkboxLabel {
+  .label {
     font-size: 13px;
   }
 }

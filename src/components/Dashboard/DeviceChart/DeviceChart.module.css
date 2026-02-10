@@ -21,7 +21,7 @@
   font-size: 14px;
   background: var(--dark-card);
   border-radius: 0;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 .chartWrapper {
@@ -29,12 +29,12 @@
   background: var(--dark-card);
   border-radius: 0;
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 :global(.recharts-tooltip-wrapper) {
   background: var(--dark-card) !important;
-  border: 1px solid var(--border-color) !important;
+  border: 0px solid var(--border-color) !important;
   border-radius: 0 !important;
   box-shadow: var(--shadow) !important;
 }

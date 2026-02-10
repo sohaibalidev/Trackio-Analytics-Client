@@ -39,7 +39,7 @@
 
 .select {
   padding: 10px 14px;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   border-radius: 0;
   background: var(--dark-card);
   color: var(--text);
@@ -61,7 +61,7 @@
   gap: 8px;
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
+  border: 0px solid var(--primary-accent);
   padding: 10px 16px;
   border-radius: 0;
   font-size: 14px;

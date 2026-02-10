@@ -20,7 +20,7 @@
   max-width: 600px;
   width: 100%;
   box-shadow: var(--shadow-hover);
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   max-height: 90vh;
   overflow-y: auto;
   animation: modalFadeIn 0.3s ease;
@@ -44,7 +44,7 @@
 
 .closeButton {
   background: rgba(212, 175, 55, 0.1);
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -83,7 +83,7 @@
   border-radius: 0;
   margin-bottom: 20px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 .codeHeader {
@@ -104,7 +104,7 @@
   gap: 6px;
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
+  border: 0px solid var(--primary-accent);
   padding: 6px 12px;
   border-radius: 0px;
   font-size: 12px;
@@ -132,6 +132,10 @@
   font-family: 'Consolas, Monaco, "Andale Mono", monospace';
   line-height: 1.5;
   max-height: 200px;
+  scrollbar-width: thin;
+  white-space: pre-wrap;
+  line-break: strict;
+  user-select: all;
   background: rgba(0, 0, 0, 0.3);
 }
 

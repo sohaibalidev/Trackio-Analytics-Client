@@ -4,7 +4,7 @@
   transition: var(--transition);
   background: var(--dark-card);
   border-radius: 0;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   padding: 20px;
 }
 
@@ -79,13 +79,13 @@
 .change.positive {
   color: var(--success);
   background: rgba(67, 160, 71, 0.1);
-  border: 1px solid rgba(67, 160, 71, 0.3);
+  border: 0px solid rgba(67, 160, 71, 0.3);
 }
 
 .change.negative {
   color: var(--error);
   background: rgba(229, 57, 53, 0.1);
-  border: 1px solid rgba(229, 57, 53, 0.3);
+  border: 0px solid rgba(229, 57, 53, 0.3);
 }
 
 @media (max-width: 768px) {

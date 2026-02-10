@@ -19,7 +19,7 @@
   max-width: 400px;
   width: 90%;
   box-shadow: var(--shadow-hover);
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   animation: popupFadeIn 0.3s ease;
 }
 
@@ -65,7 +65,7 @@
 .cancelButton {
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
+  border: 0px solid var(--primary-accent);
 }
 
 .cancelButton:hover {
@@ -75,7 +75,7 @@
 .confirmButton {
   background: var(--error);
   color: var(--text);
-  border: 1px solid var(--error);
+  border: 0px solid var(--error);
 }
 
 .confirmButton:hover {

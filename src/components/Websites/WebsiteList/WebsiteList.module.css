@@ -2,7 +2,7 @@
   background: var(--dark-card);
   border-radius: 0;
   padding: 24px;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
 }
 
 .header {
@@ -114,13 +114,13 @@
 .statusActive {
   background: rgba(67, 160, 71, 0.1);
   color: var(--success);
-  border: 1px solid rgba(67, 160, 71, 0.3);
+  border: 0px solid rgba(67, 160, 71, 0.3);
 }
 
 .statusInactive {
   background: rgba(229, 57, 53, 0.1);
   color: var(--error);
-  border: 1px solid rgba(229, 57, 53, 0.3);
+  border: 0px solid rgba(229, 57, 53, 0.3);
 }
 
 .actionButtons {
@@ -130,7 +130,7 @@
 
 .actionButton {
   padding: 8px;
-  border: 1px solid var(--border-color);
+  border: 0px solid var(--border-color);
   border-radius: 0px;
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);

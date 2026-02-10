@@ -1,0 +1,152 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--text);
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary-accent) 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.selectGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.select {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--dark-card);
+  color: var(--text);
+  font-size: 14px;
+  min-width: 180px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: var(--gold-glow);
+}
+
+.refreshButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+  border: 1px solid var(--primary-accent);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  height: 42px;
+  margin-top: 18px;
+}
+
+.refreshButton:hover:not(:disabled) {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+}
+
+.refreshButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.refreshIcon {
+  transition: transform 0.3s ease;
+}
+
+.refreshButton.loading .refreshIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .select {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .selectGroup {
+    width: 100%;
+  }
+
+  .select {
+    min-width: 100%;
+  }
+
+  .refreshButton {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
+  }
+}

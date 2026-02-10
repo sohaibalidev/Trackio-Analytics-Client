@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://trackio-analytics.netlify.app/sitemap.xml

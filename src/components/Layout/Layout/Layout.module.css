@@ -1,0 +1,58 @@
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  margin-left: 260px;
+  transition: margin-left var(--transition);
+  background: var(--dark-bg);
+  min-height: calc(100vh - 64px);
+}
+
+.mainContent.collapsed {
+  margin-left: 70px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    margin-left: 0;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 12px;
+  }
+
+  .mainContent.collapsed {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mainContent {
+    padding: 24px;
+  }
+
+  .container {
+    max-width: 1600px;
+  }
+}

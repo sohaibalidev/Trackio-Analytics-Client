@@ -1,0 +1,327 @@
+.card {
+  min-height: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-accent);
+}
+
+.cardHeader {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  min-width: 200px;
+}
+
+.statusBadge {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: rgba(67, 160, 71, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(67, 160, 71, 0.3);
+}
+
+.statusBadge.inactive {
+  background: rgba(229, 57, 53, 0.1);
+  color: var(--error);
+  border: 1px solid rgba(229, 57, 53, 0.3);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  flex: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-light);
+  min-width: 80px;
+  font-size: 14px;
+  padding-top: 2px;
+}
+
+.link {
+  color: var(--primary-accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.link:hover {
+  color: var(--primary-accent-hover);
+  text-decoration: underline;
+}
+
+.linkIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.date {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.apiKeyContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  margin-bottom: 1rem;
+  min-width: 0;
+}
+
+.apiKey {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 13px;
+  color: var(--text);
+  border: 1px solid var(--border-color);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.actionButton {
+  flex: 1;
+  min-width: 140px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+}
+
+.actionButton:hover {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  border-color: var(--primary-accent);
+}
+
+.actionButton.primary {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+}
+
+.actionButton.primary:hover {
+  background: var(--primary-accent-hover);
+}
+
+@media (max-width: 1024px) {
+  .card {
+    min-height: 180px;
+  }
+
+  .content {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .actionButton {
+    min-width: 120px;
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    min-height: auto;
+    border-radius: 6px;
+  }
+
+  .cardHeader {
+    padding: 14px 20px;
+  }
+
+  .content {
+    padding: 16px 20px;
+    gap: 14px;
+  }
+
+  .infoRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .label {
+    min-width: auto;
+    font-size: 13px;
+  }
+
+  .link {
+    font-size: 13px;
+  }
+
+  .date {
+    font-size: 13px;
+  }
+
+  .apiKey {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .actionButton {
+    min-width: 100%;
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .titleContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    min-width: auto;
+  }
+
+  .statusBadge {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .cardHeader {
+    padding: 12px 16px;
+  }
+
+  .content {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .link {
+    font-size: 12px;
+  }
+
+  .date {
+    font-size: 12px;
+  }
+
+  .apiKey {
+    font-size: 11px;
+  }
+
+  .actionButton {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    min-height: 220px;
+  }
+
+  .content {
+    padding: 28px;
+    gap: 24px;
+  }
+
+  .actionButton {
+    min-width: 160px;
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}

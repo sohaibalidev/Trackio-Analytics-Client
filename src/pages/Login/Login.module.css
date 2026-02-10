@@ -1,0 +1,229 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--dark-bg);
+  background-image:
+    radial-gradient(at 40% 20%, rgba(212, 175, 55, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(212, 175, 55, 0.1) 0px, transparent 50%);
+}
+
+.card {
+  max-width: 1000px;
+  width: 100%;
+  padding: 40px;
+  background: var(--dark-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--primary-accent) 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.features {
+  padding: 20px;
+}
+
+.features h3 {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureList li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.5;
+  gap: 12px;
+}
+
+.featureList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.featureList li svg {
+  flex-shrink: 0;
+  margin: auto 0;
+}
+
+.loginSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginCard {
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+
+.loginTitle {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.loginDescription {
+  color: var(--text-light);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.footerText {
+  font-size: 12px;
+  color: var(--text-lighter);
+}
+
+@media (max-width: 1024px) {
+  .content {
+    gap: 30px;
+  }
+
+  .card {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 24px;
+    border-radius: 6px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .features h3 {
+    font-size: 1.3rem;
+  }
+
+  .loginCard {
+    padding: 30px;
+  }
+
+  .loginTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .features {
+    padding: 0;
+  }
+
+  .featureList li {
+    font-size: 0.95rem;
+    padding-left: 28px;
+    margin-bottom: 12px;
+  }
+
+  .featureList li:before {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+
+  .loginCard {
+    padding: 24px;
+  }
+
+  .footerText {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    padding: 50px;
+  }
+
+  .content {
+    gap: 60px;
+  }
+}

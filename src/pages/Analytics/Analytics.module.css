@@ -1,0 +1,117 @@
+.container {
+  padding: 20px;
+  background: var(--dark-bg);
+  min-height: 100vh;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: var(--gold-glow);
+}
+
+.errorCard {
+  background: var(--dark-card);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--error);
+  margin: 20px;
+}
+
+.errorText {
+  color: var(--error);
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  margin-top: 20px;
+}
+
+.emptyIcon {
+  color: var(--text-lighter);
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.emptyText {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .emptyState {
+    padding: 40px 16px;
+  }
+
+  .emptyTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .emptyState {
+    padding: 30px 12px;
+  }
+
+  .emptyTitle {
+    font-size: 1.2rem;
+  }
+
+  .emptyText {
+    font-size: 0.9rem;
+  }
+}

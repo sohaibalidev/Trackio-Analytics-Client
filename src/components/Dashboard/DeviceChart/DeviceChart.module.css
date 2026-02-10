@@ -1,0 +1,77 @@
+.container {
+  height: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.emptyState {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 14px;
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.chartWrapper {
+  height: 100%;
+  background: var(--dark-card);
+  border-radius: 6px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+}
+
+:global(.recharts-tooltip-wrapper) {
+  background: var(--dark-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--shadow) !important;
+}
+
+:global(.recharts-tooltip-label) {
+  color: var(--text) !important;
+  font-weight: 500 !important;
+}
+
+:global(.recharts-tooltip-item) {
+  color: var(--text) !important;
+}
+
+:global(.recharts-legend-wrapper) {
+  color: var(--text) !important;
+}
+
+:global(.recharts-legend-item-text) {
+  color: var(--text-light) !important;
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 250px;
+  }
+
+  .chartWrapper {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 200px;
+  }
+
+  .chartWrapper {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,122 @@
+.container {
+  height: 450px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.emptyState {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 14px;
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  text-align: center;
+}
+
+.chartWrapper {
+  flex: 1;
+  min-height: 0;
+  background: var(--dark-card);
+  border-radius: 6px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+:global(.recharts-wrapper) {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+:global(.recharts-cartesian-grid-horizontal line),
+:global(.recharts-cartesian-grid-vertical line) {
+  stroke: var(--border-color) !important;
+}
+
+:global(.recharts-x-axis .recharts-cartesian-axis-tick-value),
+:global(.recharts-y-axis .recharts-cartesian-axis-tick-value) {
+  fill: var(--text-light) !important;
+  font-size: 12px !important;
+}
+
+:global(.recharts-tooltip-wrapper) {
+  background: var(--dark-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--text) !important;
+}
+
+:global(.recharts-tooltip-label) {
+  color: var(--text) !important;
+  font-weight: 500 !important;
+}
+
+:global(.recharts-tooltip-item) {
+  color: var(--text) !important;
+}
+
+:global(.recharts-legend-wrapper) {
+  color: var(--text) !important;
+}
+
+:global(.recharts-legend-item-text) {
+  color: var(--text-light) !important;
+}
+
+.tooltip {
+  background: var(--dark-card);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 250px;
+  }
+
+  .chartWrapper {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 200px;
+  }
+
+  .chartWrapper {
+    padding: 12px;
+  }
+
+  .emptyState {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+}

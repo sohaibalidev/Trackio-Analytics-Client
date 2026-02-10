@@ -1,0 +1,81 @@
+.tabsContainer {
+  background: var(--dark-card);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.tabHeaders {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tab {
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.tab:hover {
+  color: var(--text);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.tab.active {
+  color: var(--primary-accent);
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary-accent);
+}
+
+.tabContent {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .tab {
+    padding: 12px 16px;
+    font-size: 13px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .tabContent {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabHeaders {
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+  .tab {
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+  }
+
+  .tab.active::after {
+    left: 0;
+    right: auto;
+    width: 4px;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+  }
+}

@@ -1,0 +1,229 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: var(--dark-card);
+  border-radius: 6px;
+  padding: 24px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border-color);
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.closeButton {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.closeButton:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--primary-accent);
+  transform: rotate(90deg);
+}
+
+.instructions {
+  margin-bottom: 20px;
+  color: var(--text-light);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.instructions code {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-family: monospace;
+  color: var(--primary-accent);
+  font-size: 12px;
+}
+
+.codeContainer {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.codeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+  border: 1px solid var(--primary-accent);
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.copyButton:hover {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+}
+
+.copyIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.code {
+  padding: 16px;
+  margin: 0;
+  overflow: auto;
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Consolas, Monaco, "Andale Mono", monospace';
+  line-height: 1.5;
+  max-height: 200px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.steps {
+  margin-bottom: 24px;
+}
+
+.steps h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.stepsList {
+  margin-left: 20px;
+  color: var(--text-light);
+  line-height: 1.8;
+  font-size: 14px;
+  padding: 0;
+}
+
+.stepsList li {
+  margin-bottom: 8px;
+}
+
+.stepsList code {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-family: monospace;
+  color: var(--primary-accent);
+  font-size: 12px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.doneButton {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.doneButton:hover {
+  background: var(--primary-accent-hover);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .code {
+    font-size: 12px;
+    max-height: 150px;
+    padding: 12px;
+  }
+
+  .stepsList {
+    margin-left: 16px;
+    font-size: 13px;
+  }
+
+  .doneButton {
+    width: 100%;
+  }
+}

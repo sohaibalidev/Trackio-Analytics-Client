@@ -1,0 +1,50 @@
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  box-shadow: var(--gold-glow);
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--primary-accent-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .button {
+    padding: 10px 20px;
+    font-size: 15px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 8px 16px;
+    font-size: 14px;
+    gap: 8px;
+  }
+}

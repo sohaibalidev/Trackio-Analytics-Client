@@ -1,0 +1,226 @@
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--text);
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary-accent) 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--gold-glow);
+}
+
+.addButton:hover {
+  background: var(--primary-accent-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.formCard {
+  background: var(--dark-card);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.cancelButton {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+  border: 1px solid var(--primary-accent);
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cancelButton:hover {
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
+  background: var(--dark-bg);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: var(--gold-glow);
+}
+
+.errorCard {
+  background: var(--dark-card);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.errorText {
+  color: var(--error);
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 25px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .formCard {
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .formHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .formTitle {
+    font-size: 1.3rem;
+  }
+
+  .cancelButton {
+    width: 100%;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .errorText {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardHeader {
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .addButton {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .formCard {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .formTitle {
+    font-size: 1.2rem;
+  }
+
+  .cancelButton {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+  }
+
+  .errorText {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .formCard {
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+}

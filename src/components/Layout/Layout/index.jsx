@@ -5,10 +5,11 @@ import Sidebar from "../Sidebar";
 import styles from "./Layout.module.css";
 
 const Layout = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(JSON.parse(localStorage.getItem('isCollapsed')));
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
+    localStorage.setItem('isCollapsed', JSON.stringify(!sidebarCollapsed))
   };
 
   return (
@@ -17,7 +18,7 @@ const Layout = () => {
         onToggleSidebar={toggleSidebar}
         sidebarCollapsed={sidebarCollapsed}
       />
-      <Sidebar collapsed={sidebarCollapsed} />
+      <Sidebar onToggleSidebar={toggleSidebar} collapsed={sidebarCollapsed} />
       <main
         className={`${styles.mainContent} ${sidebarCollapsed ? styles.collapsed : ""}`}
       >

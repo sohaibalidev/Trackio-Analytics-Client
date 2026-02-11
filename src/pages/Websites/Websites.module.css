@@ -51,7 +51,7 @@
   box-shadow: var(--shadow);
   padding: 24px;
   margin-bottom: 30px;
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .formHeader {
@@ -72,7 +72,7 @@
 .cancelButton {
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 0px solid var(--primary-accent);
+  border: 1px solid var(--primary-accent);
   padding: 8px 16px;
   border-radius: 0px;
   font-size: 14px;
@@ -109,7 +109,7 @@
   border-radius: 0;
   box-shadow: var(--shadow);
   overflow: hidden;
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .errorText {

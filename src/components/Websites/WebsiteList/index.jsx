@@ -1,10 +1,11 @@
-import { Edit, Trash2, RefreshCw, Code } from "lucide-react";
+import { Edit, Trash2, RefreshCw, Code, Eraser } from "lucide-react";
 import styles from "./WebsiteList.module.css";
 
 const WebsiteList = ({
   websites,
   onEdit,
   onDelete,
+  onClear,
   onRegenerateKey,
   onShowScript,
 }) => {
@@ -84,6 +85,13 @@ const WebsiteList = ({
                       title="Edit"
                     >
                       <Edit size={16} className={styles.icon} />
+                    </button>
+                    <button
+                      onClick={() => onClear(website._id)}
+                      className={`${styles.actionButton} ${styles.danger}`}
+                      title="Clear Analytics"
+                    >
+                      <Eraser size={16} className={styles.icon} />
                     </button>
                     <button
                       onClick={() => onDelete(website._id)}

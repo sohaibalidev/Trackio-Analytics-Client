@@ -20,7 +20,7 @@
   background: var(--dark-card);
   border-radius: 06px;
   box-shadow: var(--shadow);
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
   min-width: 300px;
   min-height: 300px;
   text-align: center;

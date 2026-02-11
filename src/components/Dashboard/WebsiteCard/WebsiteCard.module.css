@@ -8,7 +8,7 @@
   overflow: hidden;
   background: var(--dark-card);
   border-radius: 0;
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .card:hover {
@@ -47,13 +47,13 @@
   font-weight: 500;
   background: rgba(67, 160, 71, 0.1);
   color: var(--success);
-  border: 0px solid rgba(67, 160, 71, 0.3);
+  border: 1px solid rgba(67, 160, 71, 0.3);
 }
 
 .statusBadge.inactive {
   background: rgba(229, 57, 53, 0.1);
   color: var(--error);
-  border: 0px solid rgba(229, 57, 53, 0.3);
+  border: 1px solid rgba(229, 57, 53, 0.3);
 }
 
 .content {
@@ -132,7 +132,7 @@
   font-family: "Roboto Mono", monospace;
   font-size: 13px;
   color: var(--text);
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -160,7 +160,7 @@
   justify-content: center;
   gap: 6px;
   cursor: pointer;
-  border: 0px solid var(--border-color);
+  border: 1px solid var(--border-color);
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
 }

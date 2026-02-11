@@ -15,6 +15,7 @@ const Websites = () => {
     createWebsite,
     updateWebsite,
     deleteWebsite,
+    clearAnalytics,
     regenerateApiKey,
   } = useWebsites();
 
@@ -50,6 +51,8 @@ const Websites = () => {
         await deleteWebsite(websiteId);
       } else if (action === "regenerate") {
         await regenerateApiKey(websiteId);
+      } else if (action === "clear") {
+        await clearAnalytics(websiteId);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -69,6 +72,16 @@ const Websites = () => {
       "Delete Website",
       "Are you sure you want to delete this website? All analytics data will be lost.",
       "Delete",
+    );
+  };
+
+  const handleClearAnalytics = (id) => {
+    showConfirm(
+      "clear",
+      id,
+      "Clear Analytics",
+      "Are you sure you want to clear analytics of this website?",
+      "Clear",
     );
   };
 
@@ -145,6 +158,7 @@ const Websites = () => {
         websites={websites}
         onEdit={handleEditWebsite}
         onDelete={(websiteId) => handleDelete(websiteId)}
+        onClear={(websiteId) => handleClearAnalytics(websiteId)}
         onRegenerateKey={(websiteId) => handleRegenerateKey(websiteId)}
         onShowScript={handleShowScript}
       />

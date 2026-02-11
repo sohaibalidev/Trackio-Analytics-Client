@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 import styles from "./AnalyticsTable.module.css";
 
 const AnalyticsTable = ({
@@ -7,6 +7,7 @@ const AnalyticsTable = ({
   expandedRows,
   toggleRowExpansion,
   formatDate,
+  onDelete,
   formatDuration,
   getConnectionIcon,
 }) => {
@@ -17,7 +18,6 @@ const AnalyticsTable = ({
           <tr>
             <th>Time</th>
             <th>Visitor ID</th>
-            <th>Device</th>
             <th>Duration</th>
             <th>Page</th>
             <th>Actions</th>
@@ -36,13 +36,6 @@ const AnalyticsTable = ({
                   </span>
                 </td>
                 <td>
-                  <div className={styles.deviceInfo}>
-                    <span>
-                      {item.device} · {item.os} {item.osVersion}
-                    </span>
-                  </div>
-                </td>
-                <td>
                   <span className={styles.duration}>
                     {formatDuration(item.sessionDuration)}
                   </span>
@@ -54,22 +47,31 @@ const AnalyticsTable = ({
                   </div>
                 </td>
                 <td>
-                  <button
-                    className={styles.detailsButton}
-                    onClick={() => toggleRowExpansion(item._id)}
-                  >
-                    {expandedRows.includes(item._id) ? (
-                      <>
-                        <ChevronUp size={14} />
-                        Hide
-                      </>
-                    ) : (
-                      <>
-                        <ChevronDown size={14} />
-                        Details
-                      </>
-                    )}
-                  </button>
+                  <div className={styles.actionButtons}>
+                    <button
+                      className={styles.detailsButton}
+                      onClick={() => toggleRowExpansion(item._id)}
+                    >
+                      {expandedRows.includes(item._id) ? (
+                        <>
+                          <ChevronUp size={14} />
+                          Hide
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown size={14} />
+                          Details
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => onDelete(item.websiteId, item._id)}
+                      className={`${styles.actionButton} ${styles.danger}`}
+                      title="Delete"
+                    >
+                      <Trash2 size={16} className={styles.icon} />
+                    </button>
+                  </div>
                 </td>
               </tr>
 

@@ -10,6 +10,7 @@ const AnalyticsTabs = ({
   expandedRows,
   toggleRowExpansion,
   formatDate,
+  onDelete,
   formatDuration,
   getConnectionIcon,
   getBrowserData,
@@ -45,6 +46,7 @@ const AnalyticsTabs = ({
             expandedRows={expandedRows}
             toggleRowExpansion={toggleRowExpansion}
             formatDate={formatDate}
+            onDelete={onDelete}
             formatDuration={formatDuration}
             getConnectionIcon={getConnectionIcon}
           />

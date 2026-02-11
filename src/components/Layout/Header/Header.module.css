@@ -20,22 +20,7 @@
 }
 
 .menuButton {
-  background: rgba(212, 175, 55, 0.1);
-  border: 0px solid var(--border-color);
-  color: var(--primary-accent);
-  font-size: 20px;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0;
-  transition: var(--transition);
-}
-
-.menuButton:hover {
-  background: rgba(212, 175, 55, 0.2);
+  display: none;
 }
 
 .logo {
@@ -102,7 +87,7 @@
 .logoutButton {
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 0px solid var(--primary-accent);
+  border: 1px solid var(--primary-accent);
   padding: 8px 16px;
   border-radius: 0px;
   font-size: 14px;
@@ -121,6 +106,20 @@
   .header {
     padding: 0 16px;
   }
+
+  .menuButton {
+    display: block;
+    background: transparent;
+    border: none;
+    color: var(--primary-accent);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    transition: var(--transition);
+  }
 }
 
 @media (max-width: 768px) {
@@ -131,6 +130,10 @@
 
   .logo {
     font-size: 1.25rem;
+  }
+
+  .userInfo {
+    gap: 0;
   }
 
   .userDetails {
@@ -150,11 +153,6 @@
 
   .leftSection {
     gap: 12px;
-  }
-
-  .menuButton {
-    width: 36px;
-    height: 36px;
   }
 
   .logo {

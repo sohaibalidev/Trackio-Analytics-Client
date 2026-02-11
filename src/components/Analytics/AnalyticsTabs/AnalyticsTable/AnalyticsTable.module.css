@@ -9,7 +9,7 @@
 
 .table th {
   text-align: left;
-  
+
   padding: 12px 16px;
   font-size: 12px;
   font-weight: 500;
@@ -90,7 +90,7 @@
   gap: 6px;
   background: rgba(212, 175, 55, 0.1);
   color: var(--primary-accent);
-  border: 0px solid var(--primary-accent);
+  border: 1px solid var(--primary-accent);
   padding: 6px 12px;
   border-radius: 0px;
   font-size: 12px;
@@ -101,6 +101,43 @@
 .detailsButton:hover {
   background: var(--primary-accent);
   color: var(--primary-color);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 0px;
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-accent);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.actionButton:hover {
+  background: var(--primary-accent);
+  color: var(--primary-color);
+  border-color: var(--primary-accent);
+}
+
+.actionButton.danger {
+  background: rgba(229, 57, 53, 0.1);
+  color: var(--error);
+  border-color: rgba(229, 57, 53, 0.3);
+}
+
+.actionButton.danger:hover {
+  background: var(--error);
+  color: var(--text);
 }
 
 .expandedRow {
@@ -183,6 +220,7 @@
 }
 
 @media (max-width: 768px) {
+
   .table th,
   .table td {
     padding: 12px;

@@ -18,7 +18,7 @@ export const analyticsService = {
     return response.data;
   },
 
-  getWebsites: async () => {  
+  getWebsites: async () => {
     const response = await api.get("/api/websites");
     return response.data;
   },
@@ -35,6 +35,17 @@ export const analyticsService = {
 
   deleteWebsite: async (id) => {
     const response = await api.delete(`/api/websites/${id}`);
+    return response.data;
+  },
+
+  clearAnalytics: async (id) => {
+    const response = await api.delete(`/api/analytics/${id}/all`);
+    return response.data;
+  },
+
+  deleteVisitById: async (websiteId, analyticsId) => {
+    const url = `/api/analytics/${websiteId}/${analyticsId}`;
+    const response = await api.delete(url);
     return response.data;
   },
 

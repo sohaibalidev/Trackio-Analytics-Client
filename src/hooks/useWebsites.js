@@ -47,6 +47,24 @@ export const useWebsites = () => {
     }
   };
 
+  const deleteVisitById = async (websiteId, AnalyticsId) => {
+    try {
+      await analyticsService.deleteVisitById(websiteId, AnalyticsId);
+      await fetchWebsites();
+    } catch (err) {
+      throw err.response?.data?.message || "Failed to delete visit";
+    }
+  };
+
+  const clearAnalytics = async (id) => {
+    try {
+      await analyticsService.clearAnalytics(id);
+      await fetchWebsites();
+    } catch (err) {
+      throw err.response?.data?.message || "Failed to clear analytics";
+    }
+  };
+
   const regenerateApiKey = async (id) => {
     try {
       const response = await analyticsService.regenerateApiKey(id);
@@ -69,6 +87,8 @@ export const useWebsites = () => {
     createWebsite,
     updateWebsite,
     deleteWebsite,
+    clearAnalytics,
+    deleteVisitById,
     regenerateApiKey,
   };
 };

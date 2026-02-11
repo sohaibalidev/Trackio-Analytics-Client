@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useWebsites } from "@/hooks/useWebsites";
 import { analyticsService } from "@/services/analytics";
 import { Globe } from "lucide-react";
+import ConfirmPopup from "@/components/Websites/ConfirmPopup";
 import AnalyticsHeader from "@/components/Analytics/AnalyticsHeader";
 import AnalyticsStats from "@/components/Analytics/AnalyticsStats";
 import AnalyticsCharts from "@/components/Analytics/AnalyticsCharts";
@@ -11,7 +12,7 @@ import styles from "./Analytics.module.css";
 
 const Analytics = () => {
   const location = useLocation();
-  const { websites } = useWebsites();
+  const { websites, deleteVisitById } = useWebsites();
   const [selectedWebsite, setSelectedWebsite] = useState("");
   const [period, setPeriod] = useState("24h");
   const [analyticsData, setAnalyticsData] = useState(null);
@@ -19,6 +20,28 @@ const Analytics = () => {
   const [error, setError] = useState("");
   const [tabValue, setTabValue] = useState(0);
   const [expandedRows, setExpandedRows] = useState([]);
+
+  const [confirmState, setConfirmState] = useState({
+    isOpen: false,
+    action: null,
+    websiteId: null,
+    analyticsId: null,
+    title: "",
+    message: "",
+    confirmText: "",
+  });
+
+  const showConfirm = (action, websiteId, analyticsId, title, message, confirmText = "Confirm") => {
+    setConfirmState({
+      isOpen: true,
+      action,
+      websiteId,
+      analyticsId,
+      title,
+      message,
+      confirmText,
+    });
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -101,6 +124,36 @@ const Analytics = () => {
     setExpandedRows((prev) =>
       prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
+  };
+
+  const handleConfirm = async () => {
+    const { action, websiteId, analyticsId } = confirmState;
+
+    try {
+      if (action === "deleteVisit") {
+        await deleteVisitById(websiteId, analyticsId);
+        await fetchAnalyticsData();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setConfirmState({ isOpen: false, action: null, websiteId: null, analyticsId: null });
+    }
+  };
+
+  const handleDelete = (websiteId, analyticsId) => {
+    showConfirm(
+      "deleteVisit",
+      websiteId,
+      analyticsId,
+      "Delete visit",
+      "Are you sure you want to delete this visit?",
+      "Delete",
+    );
+  };
+
+  const handleClose = () => {
+    setConfirmState({ isOpen: false, action: null, websiteId: null, analyticsId: null });
   };
 
   const formatDate = (dateString) => {
@@ -189,6 +242,7 @@ const Analytics = () => {
             expandedRows={expandedRows}
             toggleRowExpansion={toggleRowExpansion}
             formatDate={formatDate}
+            onDelete={handleDelete}
             formatDuration={formatDuration}
             getConnectionIcon={getConnectionIcon}
             getBrowserData={getBrowserData}
@@ -206,6 +260,16 @@ const Analytics = () => {
           </div>
         )
       )}
+
+      <ConfirmPopup
+        isOpen={confirmState.isOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        title={confirmState.title}
+        message={confirmState.message}
+        confirmText={confirmState.confirmText}
+        cancelText="Cancel"
+      />
     </div>
   );
 };

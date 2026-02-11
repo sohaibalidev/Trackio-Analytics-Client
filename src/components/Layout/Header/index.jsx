@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { Menu } from "lucide-react";
 import styles from "./Header.module.css";
 
 const Header = ({ onToggleSidebar, sidebarCollapsed }) => {
@@ -13,11 +13,7 @@ const Header = ({ onToggleSidebar, sidebarCollapsed }) => {
           className={styles.menuButton}
           aria-label="Toggle sidebar"
         >
-          {sidebarCollapsed ? (
-            <ChevronRight size={20} />
-          ) : (
-            <ChevronLeft size={20} />
-          )}
+          <Menu size={22} />
         </button>
         <h1 className={styles.logo}>Trackio Analytics</h1>
       </div>

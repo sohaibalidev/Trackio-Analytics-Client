@@ -1,5 +1,8 @@
+/* Analytics.module.css */
 .container {
-  padding: 20px;
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
   background: var(--dark-bg);
   min-height: 100vh;
 }
@@ -9,109 +12,67 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
-  width: 100%;
 }
 
 .spinner {
   width: 50px;
   height: 50px;
   border: 3px solid var(--border-color);
-  border-top: 3px solid var(--primary-accent);
+  border-top-color: var(--primary-accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  box-shadow: var(--gold-glow);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .errorCard {
-  background: var(--dark-card);
-  border-radius: 0;
-  box-shadow: var(--shadow);
-  overflow: hidden;
+  background: rgba(229, 57, 53, 0.1);
   border: 1px solid var(--error);
-  margin: 20px;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
 }
 
 .errorText {
   color: var(--error);
-  padding: 20px;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 16px;
 }
 
 .emptyState {
   text-align: center;
   padding: 60px 20px;
   background: var(--dark-card);
-  border-radius: 0;
+  border-radius: 8px;
+  margin-top: 30px;
+  box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
-  margin-top: 20px;
 }
 
 .emptyIcon {
-  color: var(--text-lighter);
-  margin-bottom: 16px;
+  color: var(--primary-accent);
+  margin-bottom: 20px;
+  opacity: 0.7;
 }
 
 .emptyTitle {
-  font-size: 1.5rem;
+  font-size: 24px;
   color: var(--text);
-  margin-bottom: 8px;
-  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .emptyText {
-  color: var(--text-light);
-  font-size: 1rem;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  color: var(--text-lighter);
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 16px;
-  }
-
-  .spinner {
-    width: 40px;
-    height: 40px;
-  }
-
-  .emptyState {
-    padding: 40px 16px;
-  }
-
-  .emptyTitle {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 12px;
-  }
-
-  .spinner {
-    width: 35px;
-    height: 35px;
-  }
-
-  .emptyState {
-    padding: 30px 12px;
-  }
-
-  .emptyTitle {
-    font-size: 1.2rem;
-  }
-
-  .emptyText {
-    font-size: 0.9rem;
   }
 }

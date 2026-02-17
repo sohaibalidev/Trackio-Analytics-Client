@@ -1,15 +1,17 @@
-.chartsGrid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+/* components/AnalyticsCharts.module.css */
+.chartsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 30px;
 }
 
 .chartCard {
   background: var(--dark-card);
-  border-radius: 0px;
+  border-radius: 8px;
   padding: 20px;
   border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 .chartHeader {
@@ -20,72 +22,104 @@
 }
 
 .chartTitle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.chartTitle h3 {
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: 600;
   color: var(--text);
   margin: 0;
 }
 
-.chartIcon {
-  color: var(--primary-accent);
+.chartControls {
+  display: flex;
+  gap: 8px;
 }
 
-.period {
-  font-size: 12px;
-  color: var(--text-light);
-  background: rgba(212, 175, 55, 0.1);
-  padding: 4px 10px;
-  border-radius: 0px;
+.chartTypeButton {
+  padding: 6px 12px;
+  background: var(--primary-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-lighter);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chartTypeButton:hover {
+  border-color: var(--primary-accent);
+  color: var(--text);
+}
+
+.chartTypeButton.active {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: var(--primary-color);
+}
+
+.chartWrapper {
+  width: 100%;
+  height: 300px;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.pieChartWrapper {
+  width: 100%;
+  height: 200px;
+  margin: 10px 0;
+}
+
+.legendList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.legendColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legendName {
+  color: var(--text);
+  flex: 1;
+}
+
+.legendValue {
+  color: var(--text-lighter);
   font-weight: 500;
-}
-
-.chartContainer {
-  height: 19rem;
 }
 
 @media (max-width: 1024px) {
   .chartsGrid {
     grid-template-columns: 1fr;
   }
-
-  .chartContainer {
-    height: 220px;
-  }
 }
 
 @media (max-width: 768px) {
-  .chartsGrid {
-    gap: 16px;
-    margin-bottom: 25px;
-  }
-
-  .chartCard {
-    padding: 16px;
-  }
-
-  .chartContainer {
-    height: 200px;
-  }
-}
-
-@media (max-width: 480px) {
   .chartHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
   }
 
-  .period {
-    align-self: flex-start;
+  .chartWrapper {
+    height: 250px;
   }
 
-  .chartContainer {
+  .pieChartWrapper {
     height: 180px;
   }
 }

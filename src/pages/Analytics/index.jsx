@@ -1,9 +1,9 @@
+// Analytics.jsx
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useWebsites } from "@/hooks/useWebsites";
 import { analyticsService } from "@/services/analytics";
-import { Globe } from "lucide-react";
-import ConfirmPopup from "@/components/Websites/ConfirmPopup";
+import { Globe, Activity } from "lucide-react";
 import AnalyticsHeader from "@/components/Analytics/AnalyticsHeader";
 import AnalyticsStats from "@/components/Analytics/AnalyticsStats";
 import AnalyticsCharts from "@/components/Analytics/AnalyticsCharts";
@@ -12,7 +12,7 @@ import styles from "./Analytics.module.css";
 
 const Analytics = () => {
   const location = useLocation();
-  const { websites, deleteVisitById } = useWebsites();
+  const { websites } = useWebsites();
   const [selectedWebsite, setSelectedWebsite] = useState("");
   const [period, setPeriod] = useState("24h");
   const [analyticsData, setAnalyticsData] = useState(null);
@@ -20,28 +20,6 @@ const Analytics = () => {
   const [error, setError] = useState("");
   const [tabValue, setTabValue] = useState(0);
   const [expandedRows, setExpandedRows] = useState([]);
-
-  const [confirmState, setConfirmState] = useState({
-    isOpen: false,
-    action: null,
-    websiteId: null,
-    analyticsId: null,
-    title: "",
-    message: "",
-    confirmText: "",
-  });
-
-  const showConfirm = (action, websiteId, analyticsId, title, message, confirmText = "Confirm") => {
-    setConfirmState({
-      isOpen: true,
-      action,
-      websiteId,
-      analyticsId,
-      title,
-      message,
-      confirmText,
-    });
-  };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -78,9 +56,10 @@ const Analytics = () => {
     }
   };
 
+  // Helper functions for data transformation
   const getChartData = () => {
     if (!analyticsData?.analytics) return [];
-
+    // ... existing getChartData logic ...
     const groupedData = {};
     analyticsData.analytics.forEach((item) => {
       const date = new Date(item.timestamp);
@@ -103,57 +82,58 @@ const Analytics = () => {
   };
 
   const getDeviceData = () => {
-    if (!analyticsData?.stats?.devices) return [];
-    return analyticsData.stats.devices.map((device) => ({
-      name: device._id,
-      value: device.count,
+    if (!analyticsData?.analytics) return [];
+    const deviceCount = {};
+    analyticsData.analytics.forEach((item) => {
+      const device = item.device || "Unknown";
+      deviceCount[device] = (deviceCount[device] || 0) + 1;
+    });
+    return Object.entries(deviceCount).map(([name, value]) => ({
+      name,
+      value,
     }));
   };
 
   const getBrowserData = () => {
-    if (!analyticsData?.stats?.browsers) return [];
-    return analyticsData.stats.browsers
-      .filter((browser) => browser._id)
-      .map((browser) => ({
-        name: browser._id,
-        value: browser.count,
-      }));
+    if (!analyticsData?.analytics) return [];
+    const browserCount = {};
+    analyticsData.analytics.forEach((item) => {
+      const browser = item.userAgent?.split(" ")[0] || "Unknown";
+      browserCount[browser] = (browserCount[browser] || 0) + 1;
+    });
+    return Object.entries(browserCount).map(([name, value]) => ({
+      name,
+      value,
+    }));
+  };
+
+  const getOsData = () => {
+    if (!analyticsData?.analytics) return [];
+    const osCount = {};
+    analyticsData.analytics.forEach((item) => {
+      const os = item.os || "Unknown";
+      osCount[os] = (osCount[os] || 0) + 1;
+    });
+    return Object.entries(osCount).map(([name, value]) => ({ name, value }));
+  };
+
+  const getCountryData = () => {
+    if (!analyticsData?.analytics) return [];
+    const countryCount = {};
+    analyticsData.analytics.forEach((item) => {
+      const country = item.country || "Unknown";
+      countryCount[country] = (countryCount[country] || 0) + 1;
+    });
+    return Object.entries(countryCount).map(([name, value]) => ({
+      name,
+      value,
+    }));
   };
 
   const toggleRowExpansion = (id) => {
     setExpandedRows((prev) =>
       prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
-  };
-
-  const handleConfirm = async () => {
-    const { action, websiteId, analyticsId } = confirmState;
-
-    try {
-      if (action === "deleteVisit") {
-        await deleteVisitById(websiteId, analyticsId);
-        await fetchAnalyticsData();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setConfirmState({ isOpen: false, action: null, websiteId: null, analyticsId: null });
-    }
-  };
-
-  const handleDelete = (websiteId, analyticsId) => {
-    showConfirm(
-      "deleteVisit",
-      websiteId,
-      analyticsId,
-      "Delete visit",
-      "Are you sure you want to delete this visit?",
-      "Delete",
-    );
-  };
-
-  const handleClose = () => {
-    setConfirmState({ isOpen: false, action: null, websiteId: null, analyticsId: null });
   };
 
   const formatDate = (dateString) => {
@@ -163,6 +143,7 @@ const Analytics = () => {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
+      second: "2-digit",
     });
   };
 
@@ -172,26 +153,14 @@ const Analytics = () => {
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
 
-    if (hours > 0) return `${hours}h ${minutes}m`;
+    if (hours > 0) return `${hours}h ${minutes}m ${secs}s`;
     if (minutes > 0) return `${minutes}m ${secs}s`;
     return `${secs}s`;
   };
 
-  const getConnectionIcon = (effectiveType) => {
-    switch (effectiveType) {
-      case "slow-2g":
-        return "2G";
-      case "2g":
-        return "2G";
-      case "3g":
-        return "3G";
-      case "4g":
-        return "4G";
-      case "5g":
-        return "5G";
-      default:
-        return "?";
-    }
+  const formatBattery = (level, charging) => {
+    if (level === undefined || level === null) return "N/A";
+    return `${Math.round(level * 100)}% ${charging ? "- charging" : ""}`;
   };
 
   if (loading && !analyticsData) {
@@ -227,12 +196,16 @@ const Analytics = () => {
           <AnalyticsStats
             analyticsData={analyticsData}
             formatDuration={formatDuration}
+            formatBattery={formatBattery}
           />
 
           <AnalyticsCharts
             period={period}
             getChartData={getChartData}
             getDeviceData={getDeviceData}
+            getBrowserData={getBrowserData}
+            getOsData={getOsData}
+            getCountryData={getCountryData}
           />
 
           <AnalyticsTabs
@@ -242,11 +215,12 @@ const Analytics = () => {
             expandedRows={expandedRows}
             toggleRowExpansion={toggleRowExpansion}
             formatDate={formatDate}
-            onDelete={handleDelete}
             formatDuration={formatDuration}
-            getConnectionIcon={getConnectionIcon}
+            formatBattery={formatBattery}
             getBrowserData={getBrowserData}
             getDeviceData={getDeviceData}
+            getOsData={getOsData}
+            getCountryData={getCountryData}
           />
         </>
       ) : (
@@ -260,16 +234,6 @@ const Analytics = () => {
           </div>
         )
       )}
-
-      <ConfirmPopup
-        isOpen={confirmState.isOpen}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
-        title={confirmState.title}
-        message={confirmState.message}
-        confirmText={confirmState.confirmText}
-        cancelText="Cancel"
-      />
     </div>
   );
 };

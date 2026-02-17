@@ -1,52 +1,102 @@
-import { Users, Eye, Clock, Monitor } from "lucide-react";
+// components/AnalyticsStats.jsx
+import {
+  Users,
+  Clock,
+  Globe2,
+  Monitor,
+} from "lucide-react";
 import styles from "./AnalyticsStats.module.css";
 
 const AnalyticsStats = ({ analyticsData, formatDuration }) => {
-  const stats = [
-    {
-      title: "Total Visitors",
-      value: analyticsData.stats?.totalVisitors || 0,
-      icon: <Users size={24} />,
-      description: "Unique visitors in selected period",
-      color: "var(--success, #43a047)",
-    },
-    {
-      title: "Page Views",
-      value: analyticsData.stats?.totalPageViews || 0,
-      icon: <Eye size={24} />,
-      description: "Total page views",
-      color: "var(--warning-color, #ff9800)",
-    },
-    {
-      title: "Avg. Session",
-      value: formatDuration(analyticsData.stats?.avgSessionDuration || 0),
-      icon: <Clock size={24} />,
-      description: "Average session duration",
-      color: "var(--primary-accent, #d4af37)",
-    },
-    {
-      title: "Top Device",
-      value: analyticsData.stats?.devices?.[0]?._id || "N/A",
-      icon: <Monitor size={24} />,
-      description: "Most used device type",
-      color: "var(--secondary-color, #9c27b0)",
-    },
-  ];
+  const { analytics = [], stats = {} } = analyticsData;
+
+  const totalPageViews = analytics.length;
+
+  const avgSessionDuration =
+    analytics.reduce((acc, curr) => acc + (curr.sessionDuration || 0), 0) /
+    (totalPageViews || 1);
+
+  const visitors = new Set(analytics.map((a) => a.visitorId)).size;
+
+  const countries = new Set(analytics.map((a) => a.country).filter(Boolean))
+    .size;
+
+  const devices = {
+    mobile: analytics.filter((a) => a.device?.toLowerCase().includes("mobile"))
+      .length,
+    desktop: analytics.filter((a) =>
+      a.device?.toLowerCase().includes("desktop"),
+    ).length
+  };
 
   return (
     <div className={styles.statsGrid}>
-      {stats.map((stat, index) => (
-        <div key={index} className={styles.statCard}>
-          <div className={styles.statHeader}>
-            <div className={styles.statIcon} style={{ color: stat.color }}>
-              {stat.icon}
-            </div>
-            <h4 className={styles.statTitle}>{stat.title}</h4>
-          </div>
-          <div className={styles.statValue}>{stat.value}</div>
-          <p className={styles.statDescription}>{stat.description}</p>
+      <div className={styles.statCard}>
+        <div
+          className={styles.statIcon}
+          style={{ background: "rgba(33, 150, 243, 0.1)" }}
+        >
+          <Users size={24} color="#2196F3" />
         </div>
-      ))}
+        <div className={styles.statContent}>
+          <span className={styles.statLabel}>Total Views</span>
+          <span className={styles.statValue}>{totalPageViews}</span>
+          <span className={styles.statSubtext}>visitors: {visitors}</span>
+        </div>
+      </div>
+
+      <div className={styles.statCard}>
+        <div
+          className={styles.statIcon}
+          style={{ background: "rgba(76, 175, 80, 0.1)" }}
+        >
+          <Clock size={24} color="#4CAF50" />
+        </div>
+        <div className={styles.statContent}>
+          <span className={styles.statLabel}>Avg Session</span>
+          <span className={styles.statValue}>
+            {formatDuration(avgSessionDuration)}
+          </span>
+          <span className={styles.statSubtext}>
+            Total: {formatDuration(stats.totalDuration)}
+          </span>
+        </div>
+      </div>
+
+      <div className={styles.statCard}>
+        <div
+          className={styles.statIcon}
+          style={{ background: "rgba(255, 152, 0, 0.1)" }}
+        >
+          <Globe2 size={24} color="#FF9800" />
+        </div>
+        <div className={styles.statContent}>
+          <span className={styles.statLabel}>Countries</span>
+          <span className={styles.statValue}>{countries}</span>
+          <span className={styles.statSubtext}>
+            Regions:{" "}
+            {new Set(analytics.map((a) => a.region).filter(Boolean)).size}
+          </span>
+        </div>
+      </div>
+
+      <div className={styles.statCard}>
+        <div
+          className={styles.statIcon}
+          style={{ background: "rgba(156, 39, 176, 0.1)" }}
+        >
+          <Monitor size={24} color="#9C27B0" />
+        </div>
+        <div className={styles.statContent}>
+          <span className={styles.statLabel}>Devices</span>
+          <span className={styles.statValue}>
+            {devices.desktop + devices.mobile}
+          </span>
+          <span className={styles.statSubtext}>
+            Mobile: {devices.mobile} | Desktop: {devices.desktop}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

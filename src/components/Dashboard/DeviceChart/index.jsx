@@ -8,7 +8,7 @@ import {
 } from "recharts";
 import styles from "./DeviceChart.module.css";
 
-const DeviceChart = ({ data, title }) => {
+const DeviceChart = ({ data, title = "test" }) => {
   const COLORS = [
     "var(--primary-accent)",
     "var(--success)",
@@ -40,6 +40,7 @@ const DeviceChart = ({ data, title }) => {
 
   return (
     <div className={styles.container}>
+      {console.log(title)}
       {title && <h4 className={styles.title}>{title}</h4>}
       <div className={styles.chartWrapper}>
         <ResponsiveContainer width="100%" height="100%">

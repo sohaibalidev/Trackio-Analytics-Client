@@ -2,59 +2,59 @@
 
 /* NEO NOIR */
 .neo-noir {
-  --primary-color: #0b0c10;
+  --primary-color: #0a0a0f;
   --primary-accent: #ff2a6d;
-  --primary-accent-hover: #d91e5c;
-  --dark-bg: #0a0b0e;
-  --dark-card: #14161a;
-  --text: #f0f0f0;
-  --text-light: #bcbcbc;
-  --text-lighter: #8a8a8a;
+  --primary-accent-hover: #e6205c;
+  --dark-bg: #050507;
+  --dark-card: #111316;
+  --text: #ffffff;
+  --text-light: #e0e0e0;
+  --text-lighter: #a0a0a0;
   --error: #ff4d4d;
   --success: #00cc88;
-  --transition: all 0.2s ease;
-  --shadow: 0 4px 18px rgba(255, 42, 109, 0.1);
-  --shadow-hover: 0 10px 40px rgba(255, 42, 109, 0.2);
-  --border-color: rgba(255, 42, 109, 0.25);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 20px 35px -8px rgba(255, 42, 109, 0.15);
+  --shadow-hover: 0 30px 50px -12px rgba(255, 42, 109, 0.3);
+  --border-color: rgba(255, 42, 109, 0.15);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
 
 /* DEEP FOREST */
 .deep-forest {
-  --primary-color: #1e2f23;
+  --primary-color: #0f1a12;
   --primary-accent: #a7c957;
-  --primary-accent-hover: #92b342;
-  --dark-bg: #0f1a12;
-  --dark-card: #1f2e24;
-  --text: #f1f7ed;
-  --text-light: #c7d9b7;
-  --text-lighter: #98a98b;
+  --primary-accent-hover: #8fb44a;
+  --dark-bg: #070b08;
+  --dark-card: #1a241c;
+  --text: #ffffff;
+  --text-light: #e2ecd9;
+  --text-lighter: #a3b598;
   --error: #e07b39;
   --success: #7cb083;
-  --transition: all 0.2s ease;
-  --shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-  --shadow-hover: 0 12px 42px rgba(0, 0, 0, 0.7);
-  --border-color: rgba(167, 201, 87, 0.18);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.7);
+  --shadow-hover: 0 30px 50px -12px rgba(0, 0, 0, 0.8);
+  --border-color: rgba(167, 201, 87, 0.15);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
 
 /* MIDNIGHT LAVENDER */
 .midnight-lavender {
-  --primary-color: #1e1a2b;
+  --primary-color: #151128;
   --primary-accent: #c77dff;
   --primary-accent-hover: #b45dff;
-  --dark-bg: #141124;
-  --dark-card: #231d3a;
-  --text: #f0eaff;
-  --text-light: #d3c5e8;
-  --text-lighter: #aa9ec2;
+  --dark-bg: #0c0920;
+  --dark-card: #1f1a35;
+  --text: #ffffff;
+  --text-light: #e5d9ff;
+  --text-lighter: #b8abd6;
   --error: #ff6b8b;
   --success: #a3e0b6;
-  --transition: all 0.2s ease;
-  --shadow: 0 6px 18px rgba(24, 18, 44, 0.8);
-  --shadow-hover: 0 16px 50px rgba(29, 22, 54, 0.9);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 20px 35px -8px rgba(24, 18, 44, 0.9);
+  --shadow-hover: 0 30px 50px -12px rgba(29, 22, 54, 1);
   --border-color: rgba(199, 125, 255, 0.2);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
@@ -62,20 +62,20 @@
 
 /* VOLCANIC ASH */
 .volcanic-ash {
-  --primary-color: #242424;
+  --primary-color: #1a1a1a;
   --primary-accent: #e85d04;
   --primary-accent-hover: #dc2f02;
-  --dark-bg: #1c1c1c;
-  --dark-card: #2b2b2b;
+  --dark-bg: #0f0f0f;
+  --dark-card: #222222;
   --text: #ffffff;
-  --text-light: #cccccc;
-  --text-lighter: #999999;
+  --text-light: #f0f0f0;
+  --text-lighter: #b0b0b0;
   --error: #d62828;
   --success: #2b9348;
-  --transition: all 0.2s ease;
-  --shadow: 0 5px 16px rgba(0, 0, 0, 0.65);
-  --shadow-hover: 0 14px 48px rgba(0, 0, 0, 0.8);
-  --border-color: rgba(232, 93, 4, 0.25);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.8);
+  --shadow-hover: 0 30px 50px -12px rgba(0, 0, 0, 0.9);
+  --border-color: rgba(232, 93, 4, 0.2);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
@@ -89,15 +89,15 @@
   --primary-accent-hover: #9f6e4a;
   --dark-bg: #f5efe9;
   --dark-card: #ffffff;
-  --text: #2e2e2e;
-  --text-light: #5e5e5e;
-  --text-lighter: #8e8e8e;
+  --text: #1e1e1e;
+  --text-light: #4a4a4a;
+  --text-lighter: #7a7a7a;
   --error: #c44536;
   --success: #558b6e;
-  --transition: all 0.2s ease;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --border-color: rgba(0, 0, 0, 0.06);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 25px 45px -12px rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.04);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
@@ -109,15 +109,15 @@
   --primary-accent-hover: #0077b6;
   --dark-bg: #f0fcff;
   --dark-card: #ffffff;
-  --text: #023047;
-  --text-light: #2d5a6e;
-  --text-lighter: #577b8c;
+  --text: #001d2f;
+  --text-light: #1d4b5e;
+  --text-lighter: #4a6b7c;
   --error: #d62828;
   --success: #2a9d8f;
-  --transition: all 0.2s ease;
-  --shadow: 0 5px 15px rgba(0, 150, 199, 0.08);
-  --shadow-hover: 0 12px 40px rgba(0, 150, 199, 0.12);
-  --border-color: rgba(0, 150, 199, 0.12);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 15px 30px -8px rgba(0, 150, 199, 0.1);
+  --shadow-hover: 0 25px 45px -12px rgba(0, 150, 199, 0.15);
+  --border-color: rgba(0, 150, 199, 0.1);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
@@ -134,10 +134,10 @@
   --text-lighter: #8c8c8c;
   --error: #e63946;
   --success: #52b788;
-  --transition: all 0.2s ease;
-  --shadow: 0 4px 14px rgba(255, 107, 107, 0.06);
-  --shadow-hover: 0 12px 44px rgba(255, 107, 107, 0.1);
-  --border-color: rgba(255, 107, 107, 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 15px 30px -8px rgba(255, 107, 107, 0.08);
+  --shadow-hover: 0 25px 45px -12px rgba(255, 107, 107, 0.12);
+  --border-color: rgba(255, 107, 107, 0.08);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }
@@ -154,10 +154,10 @@
   --text-lighter: #64748b;
   --error: #ef4444;
   --success: #22c55e;
-  --transition: all 0.2s ease;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 12px 36px rgba(45, 212, 191, 0.08);
-  --border-color: rgba(45, 212, 191, 0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 25px 45px -12px rgba(45, 212, 191, 0.12);
+  --border-color: rgba(45, 212, 191, 0.15);
   --bg: var(--dark-bg);
   --card-bg: var(--dark-card);
 }

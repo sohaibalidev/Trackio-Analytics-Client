@@ -1,5 +1,5 @@
 // components/AnalyticsTabs.jsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Globe,
   Monitor,
@@ -55,7 +55,11 @@ const AnalyticsTabs = ({
     }
   };
 
-  const filteredAnalytics = filterAnalytics();
+  useEffect(() => {
+    filteredAnalytics = filterAnalytics()
+  }, [tabValue])
+
+  let filteredAnalytics = filterAnalytics();
 
   const renderDetailedRow = (session) => (
     <div className={styles.expandedContent}>

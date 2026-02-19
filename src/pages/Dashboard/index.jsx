@@ -12,6 +12,8 @@ import styles from "./Dashboard.module.css";
 const Dashboard = () => {
   const {
     websites,
+    selectedWebsite,
+    setSelectedWebsite,
     loading: websitesLoading,
     error: websitesError,
   } = useWebsites();
@@ -20,7 +22,7 @@ const Dashboard = () => {
     loading: statsLoading,
     error: statsError,
   } = useDashboardStats();
-  const [selectedWebsite, setSelectedWebsite] = useState(null);
+
   const [showScriptModal, setShowScriptModal] = useState(false);
   const [stats, setStats] = useState({
     totalWebsites: 0,

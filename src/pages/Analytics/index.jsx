@@ -10,12 +10,11 @@ import AnalyticsTabs from "@/components/Analytics/AnalyticsTabs";
 import styles from "./Analytics.module.css";
 
 const Analytics = () => {
-  const { deleteVisitById } = useWebsites();
+  const { deleteVisitById, selectedWebsite, setSelectedWebsite } = useWebsites();
 
   const location = useLocation();
   const navigate = useNavigate();
   const { websites } = useWebsites();
-  const [selectedWebsite, setSelectedWebsite] = useState("");
   const [period, setPeriod] = useState("24h");
   const [analyticsData, setAnalyticsData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +26,6 @@ const Analytics = () => {
   });
 
   const showConfirm = (websiteId, analyticsId) => {
-    console.log("this: ", websiteId, analyticsId);
     setConfirmState({
       isOpen: true,
       websiteId,
@@ -59,10 +57,10 @@ const Analytics = () => {
     if (websiteId && websites.length > 0) {
       const website = websites.find((w) => w._id === websiteId);
       if (website) {
-        setSelectedWebsite(websiteId);
+        setSelectedWebsite(website);
       }
     } else if (websites.length > 0) {
-      setSelectedWebsite(websites[0]._id);
+      setSelectedWebsite(websites[0]);
     }
     if (["24h", "7d", "30d"].includes(period_q)) {
       setPeriod(period_q);
@@ -73,7 +71,7 @@ const Analytics = () => {
     if (selectedWebsite) {
       fetchAnalyticsData();
       const params = new URLSearchParams(location.search);
-      params.set("website", selectedWebsite);
+      params.set("website", selectedWebsite._id);
       params.set("period", period);
       navigate(`?${params.toString()}`, { replace: true });
     }
@@ -88,7 +86,7 @@ const Analytics = () => {
     setError("");
     try {
       const response = await analyticsService.getWebsiteAnalytics(
-        selectedWebsite,
+        selectedWebsite._id,
         period,
       );
       setAnalyticsData(response.data);

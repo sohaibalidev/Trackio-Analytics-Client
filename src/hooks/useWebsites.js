@@ -5,6 +5,7 @@ export const useWebsites = () => {
   const [websites, setWebsites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedWebsite, setSelectedWebsite] = useState(null);
 
   const fetchWebsites = async () => {
     try {
@@ -83,6 +84,8 @@ export const useWebsites = () => {
     websites,
     loading,
     error,
+    selectedWebsite,
+    setSelectedWebsite,
     fetchWebsites,
     createWebsite,
     updateWebsite,

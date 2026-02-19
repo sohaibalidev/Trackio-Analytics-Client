@@ -12,6 +12,8 @@ const Websites = () => {
     websites,
     loading,
     error,
+    selectedWebsite,
+    setSelectedWebsite,
     createWebsite,
     updateWebsite,
     deleteWebsite,
@@ -21,7 +23,6 @@ const Websites = () => {
 
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingWebsite, setEditingWebsite] = useState(null);
-  const [selectedWebsite, setSelectedWebsite] = useState(null);
   const [showScriptModal, setShowScriptModal] = useState(false);
   const [confirmState, setConfirmState] = useState({
     isOpen: false,

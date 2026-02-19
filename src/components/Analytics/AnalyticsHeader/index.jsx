@@ -16,8 +16,10 @@ const AnalyticsHeader = ({
       <div className={styles.controls}>
         <div className={styles.selectGroup}>
           <select
-            value={selectedWebsite}
-            onChange={(e) => setSelectedWebsite(e.target.value)}
+            value={selectedWebsite._id}
+            onChange={(e) =>
+              setSelectedWebsite(websites.find((w) => w._id === e.target.value))
+            }
             className={styles.select}
           >
             {websites.map((website) => (

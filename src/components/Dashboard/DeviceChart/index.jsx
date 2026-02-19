@@ -40,7 +40,6 @@ const DeviceChart = ({ data, title = "test" }) => {
 
   return (
     <div className={styles.container}>
-      {console.log(title)}
       {title && <h4 className={styles.title}>{title}</h4>}
       <div className={styles.chartWrapper}>
         <ResponsiveContainer width="100%" height="100%">

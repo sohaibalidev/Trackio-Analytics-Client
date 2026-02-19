@@ -355,12 +355,16 @@
   padding: 8px 12px 8px 36px;
   border: 1px solid var(--border-color);
   background-color: inherit;
-  color: var(--primary-accent);
+  color: var(--text-light);
   font-size: 14px;
   appearance: none;
   cursor: pointer;
   outline: none;
   transition: border-color 0.3s;
+}
+
+.filterSelect option {
+  background-color: var(--dark-card);
 }
 
 .filterSelect:hover {

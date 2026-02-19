@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useWebsites } from "@/hooks/useWebsites";
 import { analyticsService } from "@/services/analytics";
-import { Globe } from "lucide-react";
 import ConfirmPopup from "@/components/Websites/ConfirmPopup";
 import AnalyticsHeader from "@/components/Analytics/AnalyticsHeader";
 import AnalyticsStats from "@/components/Analytics/AnalyticsStats";

@@ -1,114 +1,80 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from "react";
+import "@/styles/theme.css";
 
 const ThemeContext = createContext();
 
-export const themes = {
-    neoNoir: 'neo-noir',
-    deepForest: 'deep-forest',
-    midnightLavender: 'midnight-lavender',
-    volcanicAsh: 'volcanic-ash',
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "dark",
+  );
 
-    softSand: 'soft-sand',
-    aquaBreeze: 'aqua-breeze',
-    pinkSalt: 'pink-salt',
-    slateMint: 'slate-mint',
-};
+  useEffect(() => {
+    const root = document.documentElement;
+    const themes = {
+      dark: {
+        "--primary-color": "#1a1a1a",
+        "--primary-accent": "#d4af37",
+        "--primary-accent-hover": "#c19b2e",
+        "--dark-bg": "#0a0a0a",
+        "--dark-card": "#111111",
+        "--text": "#ffffff",
+        "--text-light": "#b8b8b8",
+        "--text-lighter": "#888888",
+        "--error": "#e53935",
+        "--success": "#43a047",
+        "--shadow": "0 4px 20px rgba(0, 0, 0, 0.5)",
+        "--shadow-hover": "0 8px 30px rgba(0, 0, 0, 0.6)",
+        "--gold-glow": "0 0 15px rgba(212, 175, 55, 0.4)",
+        "--border-color": "rgba(255, 255, 255, 0.1)",
+      },
+      light: {
+        "--primary-color": "#ffffff",
+        "--primary-accent": "#c19b2e",
+        "--primary-accent-hover": "#b38b1f",
+        "--dark-bg": "#f9f9f9",
+        "--dark-card": "#ffffff",
+        "--text": "#1a1a1a",
+        "--text-light": "#555555",
+        "--text-lighter": "#777777",
+        "--error": "#d32f2f",
+        "--success": "#388e3c",
+        "--shadow": "0 4px 20px rgba(0, 0, 0, 0.1)",
+        "--shadow-hover": "0 8px 30px rgba(0, 0, 0, 0.15)",
+        "--gold-glow": "0 0 10px rgba(193, 155, 46, 0.3)",
+        "--border-color": "rgba(0, 0, 0, 0.1)",
+      },
+    };
 
-export const themeNames = {
-    [themes.neoNoir]: 'Neo Noir',
-    [themes.deepForest]: 'Deep Forest',
-    [themes.midnightLavender]: 'Midnight Lavender',
-    [themes.volcanicAsh]: 'Volcanic Ash',
-    [themes.softSand]: 'Soft Sand',
-    [themes.aquaBreeze]: 'Aqua Breeze',
-    [themes.pinkSalt]: 'Pink Salt',
-    [themes.slateMint]: 'Slate & Mint',
-};
-
-export const ThemeProvider = ({ children }) => {
-    const [currentTheme, setCurrentTheme] = useState(() => {
-        const savedTheme = localStorage.getItem('app-theme');
-        return savedTheme || themes.neoNoir;
+    Object.entries(themes[theme]).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
     });
 
-    useEffect(() => {
-        const root = document.documentElement;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-        root.classList.remove(
-            themes.neoNoir,
-            themes.deepForest,
-            themes.midnightLavender,
-            themes.volcanicAsh,
-            themes.softSand,
-            themes.aquaBreeze,
-            themes.pinkSalt,
-            themes.slateMint
-        );
+  const toggleTheme = async () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    await setThemeWithSave(newTheme);
+  };
 
-        root.classList.add(currentTheme);
-
-        localStorage.setItem('app-theme', currentTheme);
-    }, [currentTheme]);
-
-    const setTheme = (themeKey) => {
-        if (Object.values(themes).includes(themeKey)) {
-            setCurrentTheme(themeKey);
-        }
-    };
-
-    const toggleDarkLight = () => {
-        const darkThemes = [
-            themes.neoNoir,
-            themes.deepForest,
-            themes.midnightLavender,
-            themes.volcanicAsh
-        ];
-        const lightThemes = [
-            themes.softSand,
-            themes.aquaBreeze,
-            themes.pinkSalt,
-            themes.slateMint
-        ];
-
-        if (darkThemes.includes(currentTheme)) {
-            const index = darkThemes.indexOf(currentTheme);
-            setCurrentTheme(lightThemes[index % lightThemes.length]);
-        } else {
-            const index = lightThemes.indexOf(currentTheme);
-            setCurrentTheme(darkThemes[index % darkThemes.length]);
-        }
-    };
-
-    const isDark = () => {
-        const darkThemes = [
-            themes.neoNoir,
-            themes.deepForest,
-            themes.midnightLavender,
-            themes.volcanicAsh
-        ];
-        return darkThemes.includes(currentTheme);
-    };
-
-    const value = {
-        currentTheme,
-        setTheme,
-        toggleDarkLight,
-        isDark: isDark(),
-        themeName: themeNames[currentTheme],
-        themes,
-    };
-
-    return (
-        <ThemeContext.Provider value={value}>
-            {children}
-        </ThemeContext.Provider>
-    );
-};
-
-export const useTheme = () => {
-    const context = useContext(ThemeContext);
-    if (!context) {
-        throw new Error('useTheme must be used within a ThemeProvider');
+  const setThemeWithSave = async (newTheme) => {
+    if (["dark", "light"].includes(newTheme)) {
+      setTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
     }
-    return context;
-};
+  };
+
+  return (
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+        setTheme: setThemeWithSave,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);

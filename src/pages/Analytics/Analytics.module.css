@@ -1,26 +1,28 @@
-/* Analytics.module.css */
 .container {
-  padding: 24px;
-  max-width: 1600px;
+  max-width: 1800px;
   margin: 0 auto;
-  background: var(--dark-bg);
   min-height: 100vh;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 .loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
+  min-height: 80vh;
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid var(--border-color);
-  border-top-color: var(--primary-accent);
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-top-color: #d4af37;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -29,50 +31,57 @@
   }
 }
 
-.errorCard {
-  background: rgba(229, 57, 53, 0.1);
-  border: 1px solid var(--error);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 24px;
+.errorContainer {
+  padding: 32px;
+  background: #0a0a0a;
+  border: 1px solid rgba(229, 57, 53, 0.3);
+  margin: 32px;
   text-align: center;
-  box-shadow: var(--shadow);
 }
 
-.errorText {
-  color: var(--error);
-  font-size: 16px;
+.errorMessage {
+  color: #e53935;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
 }
 
 .emptyState {
   text-align: center;
-  padding: 60px 20px;
-  background: var(--dark-card);
-  border-radius: 8px;
-  margin-top: 30px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
+  padding: 80px 32px;
+  background: #0a0a0a;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  margin-top: 32px;
 }
 
 .emptyIcon {
-  color: var(--primary-accent);
-  margin-bottom: 20px;
-  opacity: 0.7;
+  color: #d4af37;
+  margin-bottom: 24px;
+  opacity: 0.8;
 }
 
 .emptyTitle {
-  font-size: 24px;
-  color: var(--text);
-  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .emptyText {
-  color: var(--text-lighter);
-  font-size: 16px;
+  color: #888888;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 16px;
+  }
+
+  .emptyState {
+    padding: 60px 20px;
   }
 }

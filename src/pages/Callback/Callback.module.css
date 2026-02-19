@@ -27,14 +27,12 @@
 }
 
 .spinner {
-  border: 3px solid var(--border-color);
-  border-top: 3px solid var(--primary-accent);
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-top-color: #d4af37;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 24px;
-  box-shadow: var(--gold-glow);
+  animation: spin 0.8s linear infinite;
 }
 
 .text {

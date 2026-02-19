@@ -67,7 +67,7 @@ const Dashboard = () => {
       <div className={styles.cardHeader}>
         <h2 className={styles.mainTitle}>Dashboard Overview</h2>
         <p className={styles.subTitle}>
-          Last 24 hours • {websites.length} websites tracked
+          Last month • {websites.length} websites tracked
         </p>
       </div>
 
@@ -103,7 +103,7 @@ const Dashboard = () => {
       <div className={styles.grid2}>
         <AnalyticsChart
           data={dashboardStats.chartData}
-          title="Traffic Overview (Last 24h)"
+          title="Traffic Overview"
         />
         <DeviceChart
           data={dashboardStats.deviceData}

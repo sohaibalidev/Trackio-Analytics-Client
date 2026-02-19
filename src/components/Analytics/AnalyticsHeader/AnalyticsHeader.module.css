@@ -1,10 +1,10 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .title {
@@ -20,113 +20,100 @@
 
 .controls {
   display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-end;
 }
 
 .selectGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.label {
-  font-size: 12px;
-  color: var(--text-lighter);
-  font-weight: 500;
+  gap: 8px;
 }
 
 .select {
-  padding: 10px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--dark-card);
-  color: var(--text);
+  background: #0a0a0a;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+  padding: 10px 32px 10px 16px;
   font-size: 14px;
-  min-width: 180px;
-  transition: var(--transition);
+  font-weight: 300;
   cursor: pointer;
-  box-shadow: var(--shadow);
+  outline: none;
+  min-width: 160px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%3E%3Cpath%20fill%3D%22%23d4af37%22%20d%3D%22M7%2010.5L1.5%205h11L7%2010.5z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
 }
 
-.select:focus {
-  outline: none;
-  border-color: var(--primary-accent);
-  box-shadow: var(--gold-glow);
+.select option {
+  background: #0a0a0a;
+  color: #ffffff;
 }
 
 .refreshButton {
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--primary-accent);
-  border: 1px solid var(--primary-accent);
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
 }
 
-.refreshButton:hover:not(:disabled) {
-  background: var(--primary-accent);
-  color: var(--primary-color);
-  box-shadow: var(--gold-glow);
+.refreshButton:hover {
+  background: #d4af37;
+  color: #000000;
 }
 
 .refreshButton:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
+.refreshButton.loading {
+  opacity: 0.7;
+}
+
 .refreshIcon {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
-.refreshButton.loading .refreshIcon {
-  animation: spin 1s linear infinite;
+.refreshButton:hover .refreshIcon {
+  transform: rotate(180deg);
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
 
-  100% {
-    transform: rotate(360deg);
+  .controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .selectGroup {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .select {
+    width: 100%;
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 25px;
-  }
-
-  .title {
-    font-size: 1.75rem;
-  }
-
-  .controls {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .select {
-    min-width: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
   }
 
   .title {
@@ -134,21 +121,22 @@
   }
 
   .controls {
-    flex-direction: column;
-    gap: 12px;
+    gap: 16px;
   }
 
   .selectGroup {
-    width: 100%;
-  }
-
-  .select {
     min-width: 100%;
   }
+}
 
-  .refreshButton {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0;
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.35rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .title {
+    font-size: 2.25rem;
   }
 }

@@ -1,4 +1,3 @@
-// components/AnalyticsCharts.jsx
 import { useState } from "react";
 import {
   XAxis,

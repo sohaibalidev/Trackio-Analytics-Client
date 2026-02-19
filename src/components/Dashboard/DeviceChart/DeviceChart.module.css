@@ -20,8 +20,8 @@
   color: var(--text-light);
   font-size: 14px;
   background: var(--dark-card);
-  border-radius: 0;
   border: 1px solid var(--border-color);
+  border-radius: 0;
 }
 
 .chartWrapper {

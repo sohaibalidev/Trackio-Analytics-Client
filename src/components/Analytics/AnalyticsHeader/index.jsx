@@ -15,7 +15,6 @@ const AnalyticsHeader = ({
       <h2 className={styles.title}>Analytics Dashboard</h2>
       <div className={styles.controls}>
         <div className={styles.selectGroup}>
-          <label className={styles.label}>Website</label>
           <select
             value={selectedWebsite}
             onChange={(e) => setSelectedWebsite(e.target.value)}
@@ -30,7 +29,6 @@ const AnalyticsHeader = ({
         </div>
 
         <div className={styles.selectGroup}>
-          <label className={styles.label}>Period</label>
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
@@ -43,9 +41,6 @@ const AnalyticsHeader = ({
         </div>
 
         <div className={styles.selectGroup}>
-          <label className={styles.label} style={{ visibility: "hidden" }}>
-            refresh
-          </label>
           <button
             className={`${styles.refreshButton} ${loading ? styles.loading : ""}`}
             onClick={fetchAnalyticsData}

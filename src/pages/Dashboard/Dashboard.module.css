@@ -74,13 +74,12 @@
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid var(--border-color);
-  border-top: 3px solid var(--primary-accent);
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-top-color: #d4af37;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  box-shadow: var(--gold-glow);
+  animation: spin 0.8s linear infinite;
 }
 
 .errorCard {

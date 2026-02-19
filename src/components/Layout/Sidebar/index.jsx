@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import { LayoutDashboard, Globe, LineChart, ChevronLeft, Menu } from "lucide-react";
-import ThemeSwitcher from "../../ThemeSwitcher";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = ({ onToggleSidebar, collapsed }) => {
@@ -45,8 +44,6 @@ const Sidebar = ({ onToggleSidebar, collapsed }) => {
           ))}
         </ul>
       </nav>
-
-      {!collapsed && <ThemeSwitcher />}
 
       {!collapsed && (
         <div className={styles.footer}>

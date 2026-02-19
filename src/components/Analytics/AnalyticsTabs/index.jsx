@@ -1,283 +1,399 @@
-// components/AnalyticsTabs.jsx
-import { useEffect, useState } from "react";
 import {
-  Globe,
-  Monitor,
-  MapPin,
-  Wifi,
-  Battery,
-  Cpu,
-  Clock,
   ChevronDown,
   ChevronRight,
+  MapPin,
+  Cpu,
+  Wifi,
+  Battery,
+  Globe,
+  Clock,
+  Monitor,
+  Smartphone,
+  Laptop,
+  Trash2,
+  Search,
+  Filter,
 } from "lucide-react";
+import { useState } from "react";
 import styles from "./AnalyticsTabs.module.css";
 
 const AnalyticsTabs = ({
-  tabValue,
-  setTabValue,
   analyticsData,
   expandedRows,
+  onDelete,
   toggleRowExpansion,
   formatDate,
   formatDuration,
   formatBattery,
-  getBrowserData,
-  getDeviceData,
-  getOsData,
-  getCountryData,
 }) => {
   const { analytics = [] } = analyticsData;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchFilter, setSearchFilter] = useState("all");
 
-  const tabs = [
-    { id: 0, label: "All Sessions", icon: <Globe size={16} /> },
-    { id: 1, label: "Devices", icon: <Monitor size={16} /> },
-    { id: 2, label: "Locations", icon: <MapPin size={16} /> },
-    { id: 3, label: "Network", icon: <Wifi size={16} /> },
-    { id: 4, label: "Battery", icon: <Battery size={16} /> },
-    { id: 5, label: "Performance", icon: <Cpu size={16} /> },
-  ];
+  const getDeviceIcon = (device) => {
+    if (device?.toLowerCase().includes("mobile"))
+      return (
+        <div title="Mobile">
+          {" "}
+          <Smartphone size={14} />
+        </div>
+      );
+    if (device?.toLowerCase().includes("tablet"))
+      return (
+        <div title="Tablet">
+          {" "}
+          <Monitor size={14} />
+        </div>
+      );
+    return (
+      <div title="Desktop">
+        {" "}
+        <Laptop size={14} />
+      </div>
+    );
+  };
 
-  const filterAnalytics = () => {
-    switch (tabValue) {
-      case 1: // Devices
-        return analytics.filter((a) => a.device || a.os || a.gpu);
-      case 2: // Locations
-        return analytics.filter((a) => a.country || a.city || a.region);
-      case 3: // Network
-        return analytics.filter((a) => a.speed || a.isp);
-      case 4: // Battery
-        return analytics.filter((a) => a.batteryLevel !== undefined);
-      case 5: // Performance
-        return analytics.filter((a) => a.speed || a.gpu);
-      default:
-        return analytics;
+  const searchInSession = (session, term, filter) => {
+    if (!term.trim()) return true;
+
+    const searchLower = term.toLowerCase();
+    const searchableFields = {
+      timestamp: formatDate(session.timestamp)?.toLowerCase() || "",
+      ipAddress: session.ipAddress?.toLowerCase() || "",
+      visitorId: session.visitorId?.toLowerCase() || "",
+      sessionId: session.sessionId?.toLowerCase() || "",
+      country: session.country?.toLowerCase() || "",
+      city: session.city?.toLowerCase() || "",
+      region: session.region?.toLowerCase() || "",
+      timezone: session.timezone?.toLowerCase() || "",
+      isp: session.isp?.toLowerCase() || "",
+      os: session.os?.toLowerCase() || "",
+      osVersion: session.osVersion?.toLowerCase() || "",
+      device: session.device?.toLowerCase() || "",
+      gpu: session.gpu?.toLowerCase() || "",
+      userAgent: session.userAgent?.toLowerCase() || "",
+      speed: session.speed?.toString() || "",
+      batteryLevel: session.batteryLevel?.toString() || "",
+      referrer: session.referrer?.toLowerCase() || "",
+      pageUrl: session.pageUrl?.toLowerCase() || "",
+      pageTitle: session.pageTitle?.toLowerCase() || "",
+      sessionStart: formatDate(session.sessionStart)?.toLowerCase() || "",
+      lastActivity: formatDate(session.lastActivity)?.toLowerCase() || "",
+      sessionDuration:
+        formatDuration(session.sessionDuration)?.toLowerCase() || "",
+    };
+
+    if (filter === "all") {
+      return Object.values(searchableFields).some((field) =>
+        field.includes(searchLower),
+      );
+    } else {
+      return searchableFields[filter]?.includes(searchLower) || false;
     }
   };
 
-  useEffect(() => {
-    filteredAnalytics = filterAnalytics()
-  }, [tabValue])
-
-  let filteredAnalytics = filterAnalytics();
+  const filteredAnalytics = analytics.filter((session) =>
+    searchInSession(session, searchTerm, searchFilter),
+  );
 
   const renderDetailedRow = (session) => (
     <div className={styles.expandedContent}>
-      <div className={styles.detailGrid}>
-        {session.os && (
+      <div className={styles.detailSection}>
+        <div className={styles.detailSectionTitle}>
+          <Globe size={14} />
+          <span>Session Information</span>
+        </div>
+        <div className={styles.detailGrid}>
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>OS:</span>
+            <span className={styles.detailLabel}>Session ID</span>
+            <span className={styles.detailValue}>{session.sessionId}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Visitor ID</span>
+            <span className={styles.detailValue}>{session.visitorId}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Started</span>
+            <span className={styles.detailValue}>
+              {formatDate(session.sessionStart)}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Last Activity</span>
+            <span className={styles.detailValue}>
+              {formatDate(session.lastActivity)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.detailSection}>
+        <div className={styles.detailSectionTitle}>
+          <MapPin size={14} />
+          <span>Location & Network</span>
+        </div>
+        <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>IP Address</span>
+            <span className={styles.detailValue}>{session.ipAddress}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Location</span>
+            <span className={styles.detailValue}>
+              {[session.city, session.region, session.country]
+                .filter(Boolean)
+                .join(", ") || "N/A"}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Timezone</span>
+            <span className={styles.detailValue}>
+              {session.timezone || "N/A"}
+            </span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>ISP</span>
+            <span className={styles.detailValue}>{session.isp || "N/A"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.detailSection}>
+        <div className={styles.detailSectionTitle}>
+          <Cpu size={14} />
+          <span>System Information</span>
+        </div>
+        <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>OS</span>
             <span className={styles.detailValue}>
               {session.os} {session.osVersion || ""}
             </span>
           </div>
-        )}
-        {session.device && (
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Device:</span>
+            <span className={styles.detailLabel}>Device</span>
             <span className={styles.detailValue}>{session.device}</span>
           </div>
-        )}
-        {session.gpu && (
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>GPU:</span>
-            <span className={styles.detailValue}>{session.gpu}</span>
-          </div>
-        )}
-        {session.screenResolution && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Resolution:</span>
+            <span className={styles.detailLabel}>Screen</span>
             <span className={styles.detailValue}>
-              {session.screenResolution.width} x{" "}
-              {session.screenResolution.height}
+              {session.screenResolution?.width} x{" "}
+              {session.screenResolution?.height}
             </span>
           </div>
-        )}
-        {session.country && (
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Location:</span>
+            <span className={styles.detailLabel}>GPU</span>
+            <span className={styles.detailValue}>{session.gpu || "N/A"}</span>
+          </div>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>User Agent</span>
+            <span className={styles.detailValue}>{session.userAgent}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.detailSection}>
+        <div className={styles.detailSectionTitle}>
+          <Wifi size={14} />
+          <span>Connection & Battery</span>
+        </div>
+        <div className={styles.detailGrid}>
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Speed</span>
             <span className={styles.detailValue}>
-              {session.city}, {session.region}, {session.country}
+              {session.speed ? `${session.speed} Mbps` : "N/A"}
             </span>
           </div>
-        )}
-        {session.isp && (
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>ISP:</span>
-            <span className={styles.detailValue}>{session.isp}</span>
-          </div>
-        )}
-        {session.ipAddress && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>IP:</span>
-            <span className={styles.detailValue}>{session.ipAddress}</span>
-          </div>
-        )}
-        {session.timezone && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Timezone:</span>
-            <span className={styles.detailValue}>{session.timezone}</span>
-          </div>
-        )}
-        {session.speed && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Speed:</span>
-            <span className={styles.detailValue}>{session.speed} Mbps</span>
-          </div>
-        )}
-        {session.batteryLevel !== undefined && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Battery:</span>
+            <span className={styles.detailLabel}>Battery</span>
             <span className={styles.detailValue}>
               {formatBattery(session.batteryLevel, session.batteryCharging)}
             </span>
           </div>
-        )}
-        {session.referrer && (
           <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Referrer:</span>
-            <span className={styles.detailValue}>{session.referrer}</span>
-          </div>
-        )}
-        {session.pageUrl && (
-          <div className={styles.detailItem}>
-            <span className={styles.detailLabel}>Page:</span>
+            <span className={styles.detailLabel}>Referrer</span>
             <span className={styles.detailValue}>
-              {session.pageTitle || session.pageUrl}
+              {session.referrer || "Direct"}
             </span>
           </div>
-        )}
+          <div className={styles.detailItem}>
+            <span className={styles.detailLabel}>Page URL</span>
+            <span className={styles.detailValue}>{session.pageUrl}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className={styles.tabsContainer}>
-      <div className={styles.tabsHeader}>
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`${styles.tabButton} ${tabValue === tab.id ? styles.activeTab : ""}`}
-            onClick={() => setTabValue(tab.id)}
-          >
-            {tab.icon}
-            <span>{tab.label}</span>
-          </button>
-        ))}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h3 className={styles.title}>Session Details</h3>
+        <span className={styles.count}>
+          {filteredAnalytics.length} sessions
+        </span>
       </div>
 
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th style={{ width: "30px" }}></th>
-              <th>Visitor</th>
-              <th>Session</th>
-              <th>Location</th>
-              <th>Device</th>
-              <th>Network</th>
-              <th>Duration</th>
-              <th>Page</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredAnalytics.map((session) => (
-              <>
-                <tr
-                  key={session._id}
-                  className={styles.tableRow}
-                  onClick={() => toggleRowExpansion(session._id)}
-                >
-                  <td className={styles.expandCell}>
-                    {expandedRows.includes(session._id) ? (
-                      <ChevronDown size={16} />
-                    ) : (
-                      <ChevronRight size={16} />
-                    )}
-                  </td>
-                  <td>
-                    <div className={styles.visitorInfo}>
-                      <span className={styles.visitorId}>
-                        {session.visitorId?.slice(0, 8)}...
-                      </span>
-                      <span className={styles.sessionId}>
-                        Session: {session.sessionId?.slice(0, 6)}...
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className={styles.sessionInfo}>
-                      <span className={styles.timestamp}>
-                        {formatDate(session.timestamp)}
-                      </span>
-                      <span className={styles.lastActivity}>
-                        Last: {formatDate(session.lastActivity)}
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    {session.country ? (
-                      <div className={styles.locationInfo}>
-                        <span>{session.country}</span>
-                        {session.city && (
-                          <span className={styles.city}>{session.city}</span>
-                        )}
-                      </div>
-                    ) : (
-                      <span className={styles.na}>N/A</span>
-                    )}
-                  </td>
-                  <td>
-                    {session.device ? (
-                      <div className={styles.deviceInfo}>
-                        <span>{session.device}</span>
-                        <span className={styles.os}>
-                          {session.os || "Unknown OS"}
-                        </span>
-                      </div>
-                    ) : (
-                      <span className={styles.na}>N/A</span>
-                    )}
-                  </td>
-                  <td>
-                    {session.speed ? (
-                      <div className={styles.networkInfo}>
-                        <span>{session.speed} Mbps</span>
-                        {session.isp && (
-                          <span className={styles.isp}>{session.isp}</span>
-                        )}
-                      </div>
-                    ) : (
-                      <span className={styles.na}>N/A</span>
-                    )}
-                  </td>
-                  <td>
-                    <span className={styles.duration}>
-                      {formatDuration(session.sessionDuration)}
-                    </span>
-                  </td>
-                  <td>
-                    <div className={styles.pageInfo}>
-                      <span className={styles.pageTitle}>
-                        {session.pageTitle || "No title"}
-                      </span>
-                      <span className={styles.pageUrl}>
-                        {session.pageUrl?.split("/").pop() || "/"}
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-                {expandedRows.includes(session._id) && (
-                  <tr>
-                    <td colSpan="8" className={styles.expandedRow}>
-                      {renderDetailedRow(session)}
-                    </td>
-                  </tr>
+      <div className={styles.searchContainer}>
+        <div className={styles.searchWrapper}>
+          <div className={styles.searchInputWrapper}>
+            <Search className={styles.searchIcon} />
+            <input
+              type="text"
+              placeholder="Search across all fields..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={styles.searchInput}
+            />
+          </div>
+          <div className={styles.filterWrapper}>
+            <Filter style={{ color: "white" }} className={styles.filterIcon} />
+            <select
+              value={searchFilter}
+              onChange={(e) => setSearchFilter(e.target.value)}
+              className={styles.filterSelect}
+            >
+              <option value="all">All Fields</option>
+              <option value="timestamp">Timestamp</option>
+              <option value="ipAddress">IP Address</option>
+              <option value="visitorId">Visitor ID</option>
+              <option value="sessionId">Session ID</option>
+              <option value="country">Country</option>
+              <option value="city">City</option>
+              <option value="region">Region</option>
+              <option value="timezone">Timezone</option>
+              <option value="isp">ISP</option>
+              <option value="os">OS</option>
+              <option value="device">Device</option>
+              <option value="gpu">GPU</option>
+              <option value="speed">Speed</option>
+              <option value="batteryLevel">Battery</option>
+              <option value="referrer">Referrer</option>
+              <option value="pageUrl">Page URL</option>
+              <option value="pageTitle">Page Title</option>
+              <option value="sessionStart">Session Start</option>
+              <option value="lastActivity">Last Activity</option>
+              <option value="sessionDuration">Duration</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.list}>
+        {filteredAnalytics.map((session) => (
+          <div key={session._id} className={styles.sessionCard}>
+            <div
+              className={styles.sessionHeader}
+              onClick={() => toggleRowExpansion(session._id)}
+            >
+              <div
+                className={styles.expandIcon}
+                title={
+                  expandedRows.includes(session._id) ? "Collapse" : "Expand"
+                }
+              >
+                {expandedRows.includes(session._id) ? (
+                  <ChevronDown size={18} />
+                ) : (
+                  <ChevronRight size={18} />
                 )}
-              </>
-            ))}
-          </tbody>
-        </table>
+              </div>
+
+              <div className={styles.visitorBadge}>
+                {getDeviceIcon(session.device)}
+                <span
+                  className={styles.visitorShortId}
+                  title={session.visitorId}
+                >
+                  {session.visitorId?.slice(0, 8)}
+                </span>
+              </div>
+
+              <div className={styles.sessionMeta}>
+                <div className={styles.timeInfo}>
+                  <Clock size={12} />
+                  <span>{formatDate(session.timestamp)}</span>
+                </div>
+                <div className={styles.locationInfo}>
+                  <MapPin size={12} />
+                  <span>
+                    {session.country || "Unknown"}
+                    {session.city ? `, ${session.city}` : ""}
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.stats}>
+                <div className={styles.stat}>
+                  <span className={styles.statLabel}>Device</span>
+                  <span className={styles.statValue}>
+                    {session.device || "N/A"}
+                  </span>
+                </div>
+                <div className={styles.stat}>
+                  <span className={styles.statLabel}>OS</span>
+                  <span className={styles.statValue}>
+                    {session.os || "N/A"}
+                  </span>
+                </div>
+                <div className={styles.stat}>
+                  <span className={styles.statLabel}>Duration</span>
+                  <span className={styles.statValue}>
+                    {formatDuration(session.sessionDuration)}
+                  </span>
+                </div>
+                <div className={styles.stat}>
+                  <span className={styles.statLabel}>Speed</span>
+                  <span className={styles.statValue}>
+                    {session.speed ? `${session.speed}Mbps` : "N/A"}
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.pageInfo}>
+                <span className={styles.pageTitle}>
+                  {session.pageTitle || "Untitled"}
+                </span>
+                <span className={styles.pageUrl} title={session.pageUrl}>
+                  {session.pageUrl?.split("/").pop() || "/"}
+                </span>
+              </div>
+
+              {session.batteryLevel !== undefined && (
+                <div
+                  className={`${styles.batteryIndicator} ${session.batteryCharging ? styles.charging : ""}`}
+                  title={`${Math.round(session.batteryLevel * 100)}%${session.batteryCharging ? " - Charging" : ""}`}
+                >
+                  <Battery size={16} />
+                  <span>{Math.round(session.batteryLevel * 100)}%</span>
+                </div>
+              )}
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(session.websiteId, session._id);
+                }}
+                className={`${styles.actionButton} ${styles.danger}`}
+                title="Delete View"
+              >
+                <Trash2 size={16} className={styles.icon} />
+              </button>
+            </div>
+
+            {expandedRows.includes(session._id) && (
+              <div className={styles.expandedSection}>
+                {renderDetailedRow(session)}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {filteredAnalytics.length === 0 && (
+          <div className={styles.emptyState}>
+            <p>No sessions match your search</p>
+          </div>
+        )}
       </div>
     </div>
   );

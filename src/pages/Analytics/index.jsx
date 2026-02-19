@@ -1,9 +1,9 @@
-// Analytics.jsx
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useWebsites } from "@/hooks/useWebsites";
 import { analyticsService } from "@/services/analytics";
-import { Globe, Activity } from "lucide-react";
+import { Globe } from "lucide-react";
+import ConfirmPopup from "@/components/Websites/ConfirmPopup";
 import AnalyticsHeader from "@/components/Analytics/AnalyticsHeader";
 import AnalyticsStats from "@/components/Analytics/AnalyticsStats";
 import AnalyticsCharts from "@/components/Analytics/AnalyticsCharts";
@@ -11,19 +11,52 @@ import AnalyticsTabs from "@/components/Analytics/AnalyticsTabs";
 import styles from "./Analytics.module.css";
 
 const Analytics = () => {
+  const { deleteVisitById } = useWebsites();
+
   const location = useLocation();
+  const navigate = useNavigate();
   const { websites } = useWebsites();
   const [selectedWebsite, setSelectedWebsite] = useState("");
   const [period, setPeriod] = useState("24h");
   const [analyticsData, setAnalyticsData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [tabValue, setTabValue] = useState(0);
   const [expandedRows, setExpandedRows] = useState([]);
+  const [confirmState, setConfirmState] = useState({
+    isOpen: false,
+    websiteId: null,
+  });
+
+  const showConfirm = (websiteId, analyticsId) => {
+    console.log("this: ", websiteId, analyticsId);
+    setConfirmState({
+      isOpen: true,
+      websiteId,
+      analyticsId,
+    });
+  };
+
+  const handleConfirm = async () => {
+    const { websiteId, analyticsId } = confirmState;
+
+    try {
+      await deleteVisitById(websiteId, analyticsId);
+      fetchAnalyticsData();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setConfirmState({ isOpen: false, websiteId: null, analyticsId: null });
+    }
+  };
+
+  const handleClose = () => {
+    setConfirmState({ isOpen: false, websiteId: null, analyticsId: null });
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const websiteId = params.get("website");
+    const period_q = params.get("period");
     if (websiteId && websites.length > 0) {
       const website = websites.find((w) => w._id === websiteId);
       if (website) {
@@ -32,13 +65,24 @@ const Analytics = () => {
     } else if (websites.length > 0) {
       setSelectedWebsite(websites[0]._id);
     }
+    if (["24h", "7d", "30d"].includes(period_q)) {
+      setPeriod(period_q);
+    }
   }, [location.search, websites]);
 
   useEffect(() => {
     if (selectedWebsite) {
       fetchAnalyticsData();
+      const params = new URLSearchParams(location.search);
+      params.set("website", selectedWebsite);
+      params.set("period", period);
+      navigate(`?${params.toString()}`, { replace: true });
     }
   }, [selectedWebsite, period]);
+
+  const handleDelete = (websiteId, analyticsId) => {
+    showConfirm(websiteId, analyticsId);
+  };
 
   const fetchAnalyticsData = async () => {
     setLoading(true);
@@ -56,10 +100,8 @@ const Analytics = () => {
     }
   };
 
-  // Helper functions for data transformation
   const getChartData = () => {
     if (!analyticsData?.analytics) return [];
-    // ... existing getChartData logic ...
     const groupedData = {};
     analyticsData.analytics.forEach((item) => {
       const date = new Date(item.timestamp);
@@ -89,7 +131,7 @@ const Analytics = () => {
       deviceCount[device] = (deviceCount[device] || 0) + 1;
     });
     return Object.entries(deviceCount).map(([name, value]) => ({
-      name,
+      name: name.charAt(0).toUpperCase() + name.slice(1),
       value,
     }));
   };
@@ -98,7 +140,8 @@ const Analytics = () => {
     if (!analyticsData?.analytics) return [];
     const browserCount = {};
     analyticsData.analytics.forEach((item) => {
-      const browser = item.userAgent?.split(" ")[0] || "Unknown";
+      const browser =
+        item.browser || item.userAgent?.split(" ")[0] || "Unknown";
       browserCount[browser] = (browserCount[browser] || 0) + 1;
     });
     return Object.entries(browserCount).map(([name, value]) => ({
@@ -143,7 +186,6 @@ const Analytics = () => {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
     });
   };
 
@@ -153,14 +195,14 @@ const Analytics = () => {
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
 
-    if (hours > 0) return `${hours}h ${minutes}m ${secs}s`;
+    if (hours > 0) return `${hours}h ${minutes}m`;
     if (minutes > 0) return `${minutes}m ${secs}s`;
     return `${secs}s`;
   };
 
   const formatBattery = (level, charging) => {
     if (level === undefined || level === null) return "N/A";
-    return `${Math.round(level * 100)}% ${charging ? "- charging" : ""}`;
+    return `${Math.round(level * 100)}%${charging ? " - Charging" : ""}`;
   };
 
   if (loading && !analyticsData) {
@@ -173,8 +215,8 @@ const Analytics = () => {
 
   if (error) {
     return (
-      <div className={styles.errorCard}>
-        <div className={styles.errorText}>Error: {error}</div>
+      <div className={styles.errorContainer}>
+        <div className={styles.errorMessage}>Error: {error}</div>
       </div>
     );
   }
@@ -191,12 +233,11 @@ const Analytics = () => {
         loading={loading}
       />
 
-      {analyticsData && selectedWebsite ? (
+      {analyticsData && selectedWebsite && (
         <>
           <AnalyticsStats
             analyticsData={analyticsData}
             formatDuration={formatDuration}
-            formatBattery={formatBattery}
           />
 
           <AnalyticsCharts
@@ -209,31 +250,28 @@ const Analytics = () => {
           />
 
           <AnalyticsTabs
-            tabValue={tabValue}
-            setTabValue={setTabValue}
+            formatDate={formatDate}
             analyticsData={analyticsData}
             expandedRows={expandedRows}
             toggleRowExpansion={toggleRowExpansion}
-            formatDate={formatDate}
+            onDelete={(websiteId, analyticsId) => {
+              handleDelete(websiteId, analyticsId);
+            }}
             formatDuration={formatDuration}
             formatBattery={formatBattery}
-            getBrowserData={getBrowserData}
-            getDeviceData={getDeviceData}
-            getOsData={getOsData}
-            getCountryData={getCountryData}
           />
         </>
-      ) : (
-        !selectedWebsite && (
-          <div className={styles.emptyState}>
-            <Globe size={60} className={styles.emptyIcon} />
-            <h3 className={styles.emptyTitle}>No website selected</h3>
-            <p className={styles.emptyText}>
-              Please select a website to view analytics data
-            </p>
-          </div>
-        )
       )}
+
+      <ConfirmPopup
+        isOpen={confirmState.isOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        title="Delete Website"
+        message="Are you sure you want to delete this view?"
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 };

@@ -1,230 +1,482 @@
-/* components/AnalyticsTabs.module.css */
-.tabsContainer {
+.container {
   background: var(--dark-card);
-  border-radius: 8px;
   border: 1px solid var(--border-color);
-  overflow: hidden;
-  box-shadow: var(--shadow);
+  padding: 24px;
 }
 
-.tabsHeader {
+.header {
   display: flex;
-  gap: 4px;
-  padding: 16px 16px 0;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--primary-color);
-  overflow-x: auto;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.tabButton {
+.title {
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.count {
+  font-size: 12px;
+  color: #d4af37;
+  font-weight: 300;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sessionCard {
+  background: var(--dark-card);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.sessionCard:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgb(14, 14, 14);
+}
+
+.sessionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.expandIcon {
+  color: #d4af37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+}
+
+.visitorBadge {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--text-lighter);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  white-space: nowrap;
+  padding: 6px 12px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  min-width: 100px;
 }
 
-.tabButton:hover {
-  color: var(--text);
+.visitorBadge svg {
+  color: #d4af37;
+  width: 14px;
+  height: 14px;
 }
 
-.activeTab {
-  color: var(--primary-accent);
-  border-bottom-color: var(--primary-accent);
+.visitorShortId {
+  font-size: 12px;
+  font-weight: 400;
+  color: #d4af37;
+  letter-spacing: 0.5px;
 }
 
-.tableContainer {
-  overflow-x: auto;
-  padding: 16px;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.table th {
-  text-align: left;
-  padding: 12px 8px;
-  color: var(--text-lighter);
-  font-weight: 500;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.table td {
-  padding: 12px 8px;
-  border-bottom: 1px solid var(--border-color);
-  color: var(--text);
-}
-
-.tableRow {
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.tableRow:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.expandCell {
-  text-align: center;
-  color: var(--text-lighter);
-}
-
-.visitorInfo {
+.sessionMeta {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 140px;
 }
 
-.visitorId {
-  font-weight: 500;
-  color: var(--primary-accent);
-}
-
-.sessionId {
-  font-size: 12px;
-  color: var(--text-lighter);
-}
-
-.sessionInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.timestamp {
-  font-weight: 500;
-}
-
-.lastActivity {
-  font-size: 12px;
-  color: var(--text-lighter);
-}
-
+.timeInfo,
 .locationInfo {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #888888;
 }
 
-.city {
-  font-size: 12px;
-  color: var(--text-lighter);
+.timeInfo svg,
+.locationInfo svg {
+  color: #d4af37;
+  width: 12px;
+  height: 12px;
 }
 
-.deviceInfo {
+.stats {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.stat {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  min-width: 60px;
 }
 
-.os {
-  font-size: 12px;
-  color: var(--text-lighter);
+.statLabel {
+  font-size: 9px;
+  font-weight: 300;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.networkInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.isp {
-  font-size: 12px;
-  color: var(--text-lighter);
-}
-
-.duration {
-  font-weight: 500;
-  color: var(--success);
+.statValue {
+  font-size: 13px;
+  font-weight: 300;
+  color: #ffffff;
+  text-transform: capitalize;
 }
 
 .pageInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  max-width: 200px;
+  gap: 2px;
+  min-width: 160px;
 }
 
 .pageTitle {
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .pageUrl {
-  font-size: 12px;
-  color: var(--text-lighter);
+  font-size: 10px;
+  color: #666666;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.na {
-  color: var(--text-lighter);
-  font-style: italic;
+.batteryIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(33, 33, 33, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  font-size: 11px;
+  color: #ffffff;
 }
 
-.expandedRow {
-  padding: 20px !important;
-  background: rgba(255, 255, 255, 0.02);
+.batteryIndicator.charging {
+  color: #d4af37;
+}
+
+.batteryIndicator.charging svg {
+  color: #d4af37;
+}
+
+.batteryIndicator svg {
+  color: #888888;
+  width: 14px;
+  height: 14px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  padding: 5px;
+  border: none;
+  border-radius: 0px;
+  background: none;
+  color: var(--primary-accent);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.actionButton.danger:hover {
+  transform: translateY(-1px);
+}
+
+.expandedSection {
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .expandedContent {
-  padding: 16px;
+  padding: 24px;
+}
+
+.detailSection {
+  margin-bottom: 28px;
+}
+
+.detailSection:last-child {
+  margin-bottom: 0;
+}
+
+.detailSectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detailSectionTitle svg {
+  width: 14px;
+  height: 14px;
 }
 
 .detailGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+  gap: 16px 24px;
 }
 
 .detailItem {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .detailLabel {
-  color: var(--text-lighter);
-  font-size: 12px;
-  min-width: 80px;
+  font-size: 9px;
+  font-weight: 300;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .detailValue {
-  color: var(--text);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #ffffff;
   word-break: break-word;
+  line-height: 1.5;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: inherit;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.emptyState p {
+  color: #666666;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.searchContainer {
+  padding: 0 0 16px 0;
+}
+
+.searchWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.searchInputWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  width: 16px;
+  height: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--border-color);
+  color: var(--text-light);
+  background-color: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.searchInput:hover {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filterWrapper {
+  position: relative;
+  min-width: 140px;
+}
+
+.filterIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.filterSelect {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--border-color);
+  background-color: inherit;
+  color: var(--primary-accent);
+  font-size: 14px;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.filterSelect:hover {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filterSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+@media (min-width: 1400px) {
+  .stats {
+    gap: 30px;
+  }
+
+  .detailGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .sessionHeader {
+    flex-wrap: wrap;
+  }
+
+  .stats {
+    order: 3;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+  }
 }
 
 @media (max-width: 768px) {
-  .tabsHeader {
-    padding: 12px 12px 0;
+  .container {
+    padding: 16px;
   }
 
-  .tabButton {
-    padding: 8px 12px;
-    font-size: 13px;
+  .header {
+    margin-bottom: 20px;
   }
 
-  .tableContainer {
-    padding: 8px;
+  .title {
+    font-size: 14px;
+  }
+
+  .sessionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .visitorBadge {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sessionMeta {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: auto;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .stat {
+    min-width: calc(50% - 8px);
+  }
+
+  .pageInfo {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .batteryIndicator {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .expandedContent {
+    padding: 16px;
   }
 
   .detailGrid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .detailSection {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat {
+    min-width: 100%;
+  }
+
+  .sessionMeta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .batteryIndicator {
+    position: static;
+    width: fit-content;
   }
 }

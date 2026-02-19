@@ -1,4 +1,3 @@
-// components/AnalyticsStats.jsx
 import {
   Users,
   Clock,
@@ -26,6 +25,9 @@ const AnalyticsStats = ({ analyticsData, formatDuration }) => {
       .length,
     desktop: analytics.filter((a) =>
       a.device?.toLowerCase().includes("desktop"),
+    ).length,
+    tablet: analytics.filter((a) =>
+      a.device?.toLowerCase().includes("tablet"),
     ).length
   };
 
@@ -90,10 +92,10 @@ const AnalyticsStats = ({ analyticsData, formatDuration }) => {
         <div className={styles.statContent}>
           <span className={styles.statLabel}>Devices</span>
           <span className={styles.statValue}>
-            {devices.desktop + devices.mobile}
+            {devices.desktop + devices.mobile + devices.tablet}
           </span>
           <span className={styles.statSubtext}>
-            Mobile: {devices.mobile} | Desktop: {devices.desktop}
+            Mobile: {devices.mobile} | Desktop: {devices.desktop} <br />Tablet: {devices.tablet}
           </span>
         </div>
       </div>

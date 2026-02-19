@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
 
-export const useAnalytics = (websiteId, period = "24h") => {
+export const useAnalytics = (websiteId, period = "30d") => {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

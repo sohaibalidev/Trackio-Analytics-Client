@@ -6,7 +6,7 @@ export const analyticsService = {
     return response.data;
   },
 
-  getWebsiteAnalytics: async (websiteId, period = "24h") => {
+  getWebsiteAnalytics: async (websiteId, period = "30d") => {
     const response = await api.get(
       `/api/analytics/website/${websiteId}?period=${period}`,
     );

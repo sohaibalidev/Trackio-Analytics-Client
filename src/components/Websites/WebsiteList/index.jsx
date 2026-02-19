@@ -1,5 +1,6 @@
-import { Edit, Trash2, RefreshCw, Code, Eraser } from "lucide-react";
+import { Edit, Trash2, RefreshCw, Code, Eraser, BarChart } from "lucide-react";
 import styles from "./WebsiteList.module.css";
+import { useNavigate } from "react-router-dom";
 
 const WebsiteList = ({
   websites,
@@ -9,6 +10,8 @@ const WebsiteList = ({
   onRegenerateKey,
   onShowScript,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -65,6 +68,15 @@ const WebsiteList = ({
                 <td>{new Date(website.createdAt).toLocaleDateString()}</td>
                 <td>
                   <div className={styles.actionButtons}>
+                    <button
+                      onClick={() =>
+                        navigate(`/analytics?website=${website._id}`)
+                      }
+                      className={styles.actionButton}
+                      title="View Analytics"
+                    >
+                      <BarChart size={16} className={styles.icon} />
+                    </button>
                     <button
                       onClick={() => onShowScript(website)}
                       className={styles.actionButton}

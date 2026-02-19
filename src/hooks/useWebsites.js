@@ -5,6 +5,7 @@ export const useWebsites = () => {
   const [websites, setWebsites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [period, setPeriod] = useState("30d");
   const [selectedWebsite, setSelectedWebsite] = useState(null);
 
   const fetchWebsites = async () => {
@@ -18,6 +19,23 @@ export const useWebsites = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const websiteId = params.get("website");
+    const period_q = params.get("period");
+    if (websiteId && websites.length > 0) {
+      const website = websites.find((w) => w._id === websiteId);
+      if (website) {
+        setSelectedWebsite(website);
+      }
+    } else if (websites.length > 0) {
+      setSelectedWebsite(websites[0]);
+    }
+    if (["24h", "7d", "30d"].includes(period_q)) {
+      setPeriod(period_q);
+    }
+  }, [location.search, websites]);
 
   const createWebsite = async (websiteData) => {
     try {
@@ -85,6 +103,8 @@ export const useWebsites = () => {
     loading,
     error,
     selectedWebsite,
+    period,
+    setPeriod,
     setSelectedWebsite,
     fetchWebsites,
     createWebsite,

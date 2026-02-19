@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useWebsites } from "@/hooks/useWebsites";
 import { useDashboardStats } from "@/hooks/useAnalytics";
-import { Globe, Users, Eye, TrendingUp } from "lucide-react";
+import { Globe, Users, Eye, TrendingUp, Clock } from "lucide-react";
 import StatsCard from "@/components/Dashboard/StatsCard";
 import WebsiteCard from "@/components/Dashboard/WebsiteCard";
 import AnalyticsChart from "@/components/Dashboard/AnalyticsChart";
@@ -25,6 +25,7 @@ const Dashboard = () => {
 
   const [showScriptModal, setShowScriptModal] = useState(false);
   const [stats, setStats] = useState({
+    avgSessionDuration: 0,
     totalWebsites: 0,
     totalVisitors: 0,
     totalPageViews: 0,
@@ -34,6 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     setStats({
       totalWebsites: websites.length,
+      avgSessionDuration: dashboardStats.avgSessionDuration,
       totalVisitors: dashboardStats.totalVisitors,
       totalPageViews: dashboardStats.totalPageViews,
       activeSessions: dashboardStats.activeSessions,
@@ -75,9 +77,9 @@ const Dashboard = () => {
 
       <div className={styles.grid4}>
         <StatsCard
-          title="Total Websites"
-          value={stats.totalWebsites}
-          icon={<Globe size={24} />}
+          title="Avg Session Duration"
+          value={stats.avgSessionDuration}
+          icon={<Clock size={24} />}
           color="var(--primary-accent)"
         />
         <StatsCard

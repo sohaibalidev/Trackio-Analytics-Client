@@ -10,12 +10,17 @@ import AnalyticsTabs from "@/components/Analytics/AnalyticsTabs";
 import styles from "./Analytics.module.css";
 
 const Analytics = () => {
-  const { deleteVisitById, selectedWebsite, setSelectedWebsite } = useWebsites();
+  const {
+    deleteVisitById,
+    selectedWebsite,
+    setSelectedWebsite,
+    period,
+    setPeriod,
+  } = useWebsites();
 
   const location = useLocation();
   const navigate = useNavigate();
   const { websites } = useWebsites();
-  const [period, setPeriod] = useState("24h");
   const [analyticsData, setAnalyticsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -51,23 +56,6 @@ const Analytics = () => {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const websiteId = params.get("website");
-    const period_q = params.get("period");
-    if (websiteId && websites.length > 0) {
-      const website = websites.find((w) => w._id === websiteId);
-      if (website) {
-        setSelectedWebsite(website);
-      }
-    } else if (websites.length > 0) {
-      setSelectedWebsite(websites[0]);
-    }
-    if (["24h", "7d", "30d"].includes(period_q)) {
-      setPeriod(period_q);
-    }
-  }, [location.search, websites]);
-
-  useEffect(() => {
     if (selectedWebsite) {
       fetchAnalyticsData();
       const params = new URLSearchParams(location.search);
@@ -89,6 +77,7 @@ const Analytics = () => {
         selectedWebsite._id,
         period,
       );
+      console.log(response.data)
       setAnalyticsData(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch analytics data");
@@ -188,13 +177,18 @@ const Analytics = () => {
 
   const formatDuration = (seconds) => {
     if (!seconds) return "0s";
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
 
-    if (hours > 0) return `${hours}h ${minutes}m`;
-    if (minutes > 0) return `${minutes}m ${secs}s`;
-    return `${secs}s`;
+    if (seconds >= 3600) {
+      const hours = (seconds / 3600).toFixed(1);
+      return `${hours}h`;
+    }
+
+    if (seconds >= 60) {
+      const minutes = (seconds / 60).toFixed(1);
+      return `${minutes}m`;
+    }
+
+    return `${seconds.toFixed(1)}s`;
   };
 
   const formatBattery = (level, charging) => {

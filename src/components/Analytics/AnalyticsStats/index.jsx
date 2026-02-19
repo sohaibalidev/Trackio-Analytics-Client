@@ -9,11 +9,9 @@ import styles from "./AnalyticsStats.module.css";
 const AnalyticsStats = ({ analyticsData, formatDuration }) => {
   const { analytics = [], stats = {} } = analyticsData;
 
-  const totalPageViews = analytics.length;
+  console.log(stats)
 
-  const avgSessionDuration =
-    analytics.reduce((acc, curr) => acc + (curr.sessionDuration || 0), 0) /
-    (totalPageViews || 1);
+  const totalPageViews = analytics.length;
 
   const visitors = new Set(analytics.map((a) => a.visitorId)).size;
 
@@ -57,7 +55,7 @@ const AnalyticsStats = ({ analyticsData, formatDuration }) => {
         <div className={styles.statContent}>
           <span className={styles.statLabel}>Avg Session</span>
           <span className={styles.statValue}>
-            {formatDuration(avgSessionDuration)}
+            {stats.avgSessionDuration}
           </span>
           <span className={styles.statSubtext}>
             Total: {formatDuration(stats.totalDuration)}

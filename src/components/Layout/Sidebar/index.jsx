@@ -1,5 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Globe, LineChart, ChevronLeft, Menu } from "lucide-react";
+import {
+  LayoutDashboard,
+  Globe,
+  LineChart,
+  ChevronLeft,
+  Menu,
+  Heart,
+  Coffee,
+} from "lucide-react";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = ({ onToggleSidebar, collapsed }) => {
@@ -20,11 +28,7 @@ const Sidebar = ({ onToggleSidebar, collapsed }) => {
             className={styles.menuButton}
             aria-label="Toggle sidebar"
           >
-            {collapsed ? (
-              <Menu size={22} />
-            ) : (
-              <ChevronLeft size={22} />
-            )}
+            {collapsed ? <Menu size={22} /> : <ChevronLeft size={22} />}
           </button>
         </div>
         <ul className={styles.menuList}>
@@ -32,8 +36,9 @@ const Sidebar = ({ onToggleSidebar, collapsed }) => {
             <li key={item.path} className={styles.menuItem}>
               <Link
                 to={item.path}
-                className={`${styles.menuLink} ${location.pathname === item.path ? styles.active : ""
-                  }`}
+                className={`${styles.menuLink} ${
+                  location.pathname === item.path ? styles.active : ""
+                }`}
               >
                 <span className={styles.menuIcon}>{item.icon}</span>
                 {!collapsed && (
@@ -47,7 +52,18 @@ const Sidebar = ({ onToggleSidebar, collapsed }) => {
 
       {!collapsed && (
         <div className={styles.footer}>
-          <p className={styles.footerText}>Analytics Tool v1.0</p>
+          <p className={styles.footerText}>
+            Made with <Heart size={14} className={styles.icon} /> and{" "}
+            <Coffee size={14} className={styles.icon} /> by{" "}
+            <a
+              href="https://www.linkedin.com/in/muhammadsohaibali/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footerLink}
+            >
+              Sohaib Ali
+            </a>
+          </p>
         </div>
       )}
     </aside>

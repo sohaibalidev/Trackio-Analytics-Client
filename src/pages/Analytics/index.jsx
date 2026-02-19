@@ -77,7 +77,6 @@ const Analytics = () => {
         selectedWebsite._id,
         period,
       );
-      console.log(response.data)
       setAnalyticsData(response.data);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch analytics data");

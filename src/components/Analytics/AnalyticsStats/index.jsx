@@ -9,12 +9,8 @@ import styles from "./AnalyticsStats.module.css";
 const AnalyticsStats = ({ analyticsData, formatDuration }) => {
   const { analytics = [], stats = {} } = analyticsData;
 
-  console.log(stats)
-
   const totalPageViews = analytics.length;
-
   const visitors = new Set(analytics.map((a) => a.visitorId)).size;
-
   const countries = new Set(analytics.map((a) => a.country).filter(Boolean))
     .size;
 
